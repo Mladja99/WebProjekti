@@ -1,6 +1,6 @@
 export class Vozilo
 {
-    constructor(marka, oznaka, registracija,vrstaKvara, opisProblema)
+    constructor(marka, oznaka, registracija, vrstaKvara, opisProblema)
     {
         this.marka = marka;
         this.oznaka = oznaka;

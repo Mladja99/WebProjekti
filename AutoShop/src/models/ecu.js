@@ -1,6 +1,5 @@
 export class ECU
 {
-
     constructor()
     {
         this.Vozilo = null;
@@ -8,6 +7,12 @@ export class ECU
         this.Majstor = null;
         this.Segrt = null;
     }
-    
-    
+
+    constructor(vozilo)
+    {
+        this.Vozilo = vozilo;
+        this.Zauzeto = true;
+        this.Majstor = null;
+        this.Segrt = null;
+    }
 }

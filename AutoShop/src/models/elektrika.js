@@ -8,15 +8,23 @@ export class Elektrika
         this.Segrt = null;
     }
 
+    constructor(vozilo)
+    {
+        this.Vozilo = vozilo;
+        this.Zauzeto = true;
+        this.Majstor = null;
+        this.Segrt = null;
+    }
+}
     
     
 
-    function UbaciVozilo(vozilo)
+    /*export function UbaciVozilo(vozilo)
     {
 
     }
 
-    function IzbaciVozilo()
+    export function IzbaciVozilo()
     {
         this.Vozilo = null;
         this.Zauzeto = false;
@@ -25,5 +33,4 @@ export class Elektrika
     async function RadiNaVozilu(majstor)
     {
         
-    }
-}
+    }*/
