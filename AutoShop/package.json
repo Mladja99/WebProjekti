@@ -2,14 +2,16 @@
   "name": "AutoShop",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "servis.js",
   "scripts": {
-    "start": "webpack-dev-server --mode development"
+    "start": "webpack-dev-server --mode development",
+    "db": "json-server servis-db.json --watch"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "json-server":"^0.16.1",
     "rxjs": "^6.5.5",
     "ts-loader": "^7.0.1",
     "typescript": "^3.8.3",

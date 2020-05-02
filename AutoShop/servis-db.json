@@ -1,0 +1,82 @@
+{
+    "majstori":[
+        {
+            "Id" : "1",
+            "Ime" : "Pera",
+            "Poznaje" : "",
+            "Zauzet" : "",
+            "RadiNa" : ""
+        },
+        {
+            "Id" : "1",
+            "Ime" : "Pera",
+            "Poznaje" : "",
+            "Zauzet" : "",
+            "RadiNa" : ""
+        }
+    ],
+    "segrti":[
+        {
+            "Id" : "id",
+            "Ime" : "ime",
+            "Zauzet" : "false",
+            "RadiNa" : "null"
+        },
+        {
+            "Id" : "id",
+            "Ime" : "ime",
+            "Zauzet" : "false",
+            "RadiNa" : "null"
+        }
+    ],
+    "vozila":[
+        {
+            "Marka" : "marka",
+            "Oznaka" : "oznaka",
+            "Registracija" : "a111111",
+            "VrstaKvara" : "vrstaKvara",
+            "OpisProblema" : "opisProblema",
+            "Status" : ""
+        },
+        {
+            "Marka" : "marka",
+            "Oznaka" : "oznaka",
+            "Registracija" : "a222222",
+            "VrstaKvara" : "vrstaKvara",
+            "OpisProblema" : "opisProblema",
+            "Status" : ""
+        },
+        {
+            "Marka" : "marka",
+            "Oznaka" : "oznaka",
+            "Registracija" : "a333333",
+            "VrstaKvara" : "vrstaKvara",
+            "OpisProblema" : "opisProblema",
+            "Status" : ""
+        },
+        {
+            "Marka" : "marka",
+            "Oznaka" : "oznaka",
+            "Registracija" : "a444444",
+            "VrstaKvara" : "vrstaKvara",
+            "OpisProblema" : "opisProblema",
+            "Status" : ""
+        },
+        {
+            "Marka" : "marka",
+            "Oznaka" : "oznaka",
+            "Registracija" : "a555555",
+            "VrstaKvara" : "vrstaKvara",
+            "OpisProblema" : "opisProblema",
+            "Status" : ""
+        },
+        {
+            "Marka" : "marka",
+            "Oznaka" : "oznaka",
+            "Registracija" : "a666666",
+            "VrstaKvara" : "vrstaKvara",
+            "OpisProblema" : "opisProblema",
+            "Status" : ""
+        }
+    ]
+}

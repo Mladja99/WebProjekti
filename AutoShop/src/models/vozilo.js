@@ -2,11 +2,11 @@ export class Vozilo
 {
     constructor(marka, oznaka, registracija, vrstaKvara, opisProblema)
     {
-        this.marka = marka;
-        this.oznaka = oznaka;
-        this.registracija = registracija;
-        this.vrstaKvara = vrstaKvara;
-        this.opisProblema = opisProblema;
-        this.status = "Na cekanju";
+        this.Marka = marka;
+        this.Oznaka = oznaka;
+        this.Registracija = registracija;
+        this.VrstaKvara = vrstaKvara;
+        this.OpisProblema = opisProblema;
+        this.Status = "Na cekanju";
     }
 }
