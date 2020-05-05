@@ -1,7 +1,10 @@
 
 export class View
 {
-    constructor(parent)
+    container: HTMLDivElement;
+    header: HTMLDivElement;
+    mainContainer: HTMLDivElement;
+    constructor(parent: HTMLElement)
     {
         this.container = document.createElement("div");
         this.container.className = "container";
@@ -33,7 +36,7 @@ export class View
         parent.appendChild(this.container);
     }
 
-    crtajGarazu(path, name)
+    crtajGarazu(path: { appendChild: (arg0: HTMLDivElement) => void; }, name: string)
     {
         const garaza = document.createElement("div");
         garaza.className = name; // div cele garaze

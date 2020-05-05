@@ -1,6 +1,12 @@
 export class Vozilo
 {
-    constructor(marka, oznaka, registracija, vrstaKvara, opisProblema)
+    Marka: any;
+    Oznaka: any;
+    Registracija: any;
+    VrstaKvara: any;
+    OpisProblema: any;
+    Status: string;
+    constructor(marka:any, oznaka:any, registracija:any, vrstaKvara:any, opisProblema:any)
     {
         this.Marka = marka;
         this.Oznaka = oznaka;

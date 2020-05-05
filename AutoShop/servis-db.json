@@ -3,78 +3,78 @@
         {
             "Id" : "1",
             "Ime" : "Pera",
-            "Poznaje" : "",
+            "Poznaje" : "ecu, mehanika, elektrika",
             "Zauzet" : "",
             "RadiNa" : ""
         },
         {
-            "Id" : "1",
-            "Ime" : "Pera",
-            "Poznaje" : "",
+            "Id" : "2",
+            "Ime" : "Mika",
+            "Poznaje" : "ecu",
             "Zauzet" : "",
             "RadiNa" : ""
         }
     ],
     "segrti":[
         {
-            "Id" : "id",
-            "Ime" : "ime",
+            "Id" : "3",
+            "Ime" : "Djoka",
             "Zauzet" : "false",
-            "RadiNa" : "null"
+            "RadiNa" : ""
         },
         {
-            "Id" : "id",
-            "Ime" : "ime",
+            "Id" : "4",
+            "Ime" : "Laza",
             "Zauzet" : "false",
-            "RadiNa" : "null"
+            "RadiNa" : ""
         }
     ],
     "vozila":[
         {
-            "Marka" : "marka",
-            "Oznaka" : "oznaka",
+            "Marka" : "BMW",
+            "Oznaka" : "E90",
             "Registracija" : "a111111",
-            "VrstaKvara" : "vrstaKvara",
+            "VrstaKvara" : "ecu",
             "OpisProblema" : "opisProblema",
             "Status" : ""
         },
         {
-            "Marka" : "marka",
-            "Oznaka" : "oznaka",
+            "Marka" : "BMW",
+            "Oznaka" : "E46",
             "Registracija" : "a222222",
-            "VrstaKvara" : "vrstaKvara",
+            "VrstaKvara" : "mehanika",
             "OpisProblema" : "opisProblema",
             "Status" : ""
         },
         {
-            "Marka" : "marka",
-            "Oznaka" : "oznaka",
+            "Marka" : "Renault",
+            "Oznaka" : "4",
             "Registracija" : "a333333",
-            "VrstaKvara" : "vrstaKvara",
+            "VrstaKvara" : "mehanika",
             "OpisProblema" : "opisProblema",
             "Status" : ""
         },
         {
-            "Marka" : "marka",
-            "Oznaka" : "oznaka",
+            "Marka" : "Volkswagen",
+            "Oznaka" : "Golf 4",
             "Registracija" : "a444444",
-            "VrstaKvara" : "vrstaKvara",
+            "VrstaKvara" : "elektrika",
             "OpisProblema" : "opisProblema",
             "Status" : ""
         },
         {
-            "Marka" : "marka",
-            "Oznaka" : "oznaka",
+            "Marka" : "Volksvagen",
+            "Oznaka" : "Chirocco",
             "Registracija" : "a555555",
-            "VrstaKvara" : "vrstaKvara",
+            "VrstaKvara" : "elektrika",
             "OpisProblema" : "opisProblema",
             "Status" : ""
         },
         {
-            "Marka" : "marka",
-            "Oznaka" : "oznaka",
+            "Marka" : "Volksvagen",
+            "Oznaka" : "Chirocco",
             "Registracija" : "a666666",
-            "VrstaKvara" : "vrstaKvara",
+            "VrstaKvara" : "ecu",
             "OpisProblema" : "opisProblema",
             "Status" : ""
         }

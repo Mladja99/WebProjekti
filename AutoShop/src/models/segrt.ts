@@ -1,6 +1,10 @@
 export class Segrt
 {
-    constructor(id, ime)
+    Id: any;
+    Ime: any;
+    Zauzet: boolean;
+    RadiNa: any;
+    constructor(id: any, ime: any)
     {
         this.Id = id;
         this.Ime = ime;

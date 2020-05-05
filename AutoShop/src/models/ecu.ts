@@ -1,17 +1,13 @@
 export class ECU
 {
+    Vozilo: any;
+    Zauzeto: boolean;
+    Majstor: any;
+    Segrt: any;
     constructor()
     {
         this.Vozilo = null;
         this.Zauzeto = false;
-        this.Majstor = null;
-        this.Segrt = null;
-    }
-
-    constructor(vozilo)
-    {
-        this.Vozilo = vozilo;
-        this.Zauzeto = true;
         this.Majstor = null;
         this.Segrt = null;
     }
