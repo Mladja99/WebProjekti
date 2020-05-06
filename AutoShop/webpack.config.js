@@ -1,14 +1,29 @@
 const path = require('path');
 
 module.exports = {
-  entry: ['babel-polyfill','./src/servis.ts'],
+  mode: 'development',
+  //entry: ['babel-polyfill','./src/service.ts'],
+  entry: './src/servis.ts',
   devtool: 'inline-source-map',
   module: {
     rules: [
       {
         test: /\.tsx?$/,
-        use: "ts-loader",
+        use: 'ts-loader',
         exclude: /node_modules/
+      },
+      {
+        test: /\.jsx?$/,
+        exclude: /node_modules/,
+        use: {loader:'babel-loader',
+          options: {
+            present:["@babel/present-env"]
+          }
+        }
+      },
+      {
+        test: /\.css$/,
+        use: ['style-loader','css-loader']
       }
     ]
   },
@@ -20,6 +35,7 @@ module.exports = {
     filename: 'bundle.js'
   },
   devServer: {
-    contextBase: "./dist"
+    contentBase: path.join(__dirname,"./dist"),
+    compress: true
   }
 };

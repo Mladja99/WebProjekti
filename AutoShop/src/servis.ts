@@ -7,7 +7,7 @@ import { Segrt } from "./models/segrt";
 import { vratiSegrte } from "./models/segrti.service";
 import { Vozilo } from "./models/vozilo";
 import { vratiVozila } from "./models/vozila.service";
-import {from, Observable, concat} from "rxjs";
+import { Observable } from "rxjs";
 import { debounceTime } from "rxjs/operators";
 
    // const url_db = "http://localhost:3000/"
@@ -31,44 +31,70 @@ import { debounceTime } from "rxjs/operators";
 
     var vozilaObservable = Observable.create((observer: any) => {
         SvaVozila.forEach(voz => {
+            console.log(voz);
             debounceTime(Math.floor(Math.random()*3000)+2000);//random br izmedju 2000 i 5000
             observer.next(voz); // ne znam sta ce vrati
+            //observer.next(voz as Vozilo);
         });
     });
 
     vozilaObservable.subscribe(
-        (x: Vozilo) => DolazakVozila(x),
+        //(x: Vozilo) => DolazakVozila(x),
+        (x: Vozilo) => Glavna(x),
         (error: any) => console.log(error)
     );
 
-    function DolazakVozila(vozilo:Vozilo) //mora da se uprosti da samo dodaje na red ili da se prosledi za ubacivanje
+    async function Glavna(vozilo: Vozilo)
+    {
+        var slobodanSegrt:Segrt;
+        slobodanSegrt = await DolazakVozila(vozilo);
+        if(slobodanSegrt != null) 
+        {
+            console.log("Segrt ubacuje vozilo");
+            console.log(await SegrtUbacujeVozilo(slobodanSegrt, vozilo));
+            console.log("Segrt ubacio");
+        }
+        var slobodniMajtsori:Majstor[] = NadjiSlobodnogMajstora();
+        if(slobodniMajtsori!=null)
+        {
+            console.log(await PosaljiMajstoraDaRadi(slobodniMajtsori[0],vozilo));
+        }
+        var slobodniSegrti = NadjiSlobodnogSegrta()
+        await SegrtIzbacujeVozilo(slobodniSegrti[0], vozilo);
+        OdlazakVozila(vozilo);
+    }
+
+    async function DolazakVozila(vozilo:Vozilo) //mora da se uprosti da samo dodaje na red ili da se prosledi za ubacivanje
     {
         var j = 0;
         VozilaNaCekanju.forEach((element: { VrstaKvara: any; }) => { //proverava da li ima neko vozilo koje ceka za istu radionicu
             if(vozilo.VrstaKvara == element.VrstaKvara) j++;
         });
-        if(j==0 && !this.ProveriZauzeto(vozilo.VrstaKvara)) //slucaj kada jedini ceka za radionicu i ona je slobodna
+        if(j==0 && !ProveriZauzeto(vozilo.VrstaKvara)) //slucaj kada jedini ceka za radionicu i ona je slobodna
         {
-            let Slobodni = this.NadjiSlobodnogSegrta(); //nalazi slobodnog segrta
+            let Slobodni = NadjiSlobodnogSegrta(); //nalazi slobodnog segrta
             if(Slobodni!=null) //ako ima slobodan segrt onda on ubacije vozilo ako ne onda ide na listu cekanja
             {
                 //SegrtUbacujeVozilo(Slobodni[0], vozilo);//moze take da se koristi
-                SegrtUbacujeVozilo(Slobodni.take(1), vozilo);
+                //SegrtUbacujeVozilo(Slobodni.take(1), vozilo);
+                return Slobodni[0];
             }
             else
             {
                 VozilaNaCekanju.push(vozilo);
+                return null;
             }
         }
         else
         {
             VozilaNaCekanju.push(vozilo);
+            return null;
         }
     }
 
     function OdlazakVozila(vozilo: Vozilo)
     {
-       this.SvaVozila = SvaVozila.filter(x => x.Registracija != vozilo.Registracija);       
+       SvaVozila = SvaVozila.filter(x => x.Registracija != vozilo.Registracija);       
     }
 
     async function SegrtUbacujeVozilo(segrt: Segrt, vozilo: Vozilo)
@@ -76,25 +102,25 @@ import { debounceTime } from "rxjs/operators";
         segrt.Zauzet = true;
         if(vozilo.VrstaKvara == "ecu")
         {
-            this.ecu.Zauzeto = true;
+            ecu.Zauzeto = true;
             debounceTime(Math.floor(Math.random()*3000)+2000);//random br izmedju 2000 i 5000
-            this.ecu.Vozilo = vozilo;
+            ecu.Vozilo = vozilo;
             segrt.Zauzet = false;
             return "vozilo ubaceno u garazu za ecu";
         }
         else if(vozilo.VrstaKvara == "mehanika")
         {
-            this.mehanika.Zauzeto = true;
+            mehanika.Zauzeto = true;
             debounceTime(Math.floor(Math.random()*3000)+2000);//random br izmedju 2000 i 5000
-            this.mehanika.Vozilo = vozilo;
+            mehanika.Vozilo = vozilo;
             segrt.Zauzet = false;
             return "vozilo ubaceno u garazu za mehaniku";
         }
         else
         {
-            this.elektrika.Zauzeto = true;
+            elektrika.Zauzeto = true;
             debounceTime(Math.floor(Math.random()*3000)+2000);//random br izmedju 2000 i 5000
-            this.elektrika.Vozilo = vozilo;
+            elektrika.Vozilo = vozilo;
             segrt.Zauzet = false;
             return "vozilo ubaceno u garazu za mehaniku";
         }
@@ -102,7 +128,31 @@ import { debounceTime } from "rxjs/operators";
 
     async function SegrtIzbacujeVozilo(segrt: any, vozilo: any) 
     {
-
+        segrt.Zauzet = true;
+        if(vozilo.VrstaKvara == "ecu")
+        {
+            debounceTime(Math.floor(Math.random()*3000)+2000);//random br izmedju 2000 i 5000
+            ecu.Zauzeto = false;
+            ecu.Vozilo = null;
+            segrt.Zauzet = false;
+            return "vozilo izbaceno iz garaze za ecu";
+        }
+        else if(vozilo.VrstaKvara == "mehanika")
+        {
+            debounceTime(Math.floor(Math.random()*3000)+2000);//random br izmedju 2000 i 5000
+            mehanika.Zauzeto = false;
+            mehanika.Vozilo = null;
+            segrt.Zauzet = false;
+            return "vozilo izbaceno iz garaze za mehaniku";
+        }
+        else
+        {
+            debounceTime(Math.floor(Math.random()*3000)+2000);//random br izmedju 2000 i 5000
+            elektrika.Zauzeto = false;
+            elektrika.Vozilo = null;
+            segrt.Zauzet = false;
+            return "vozilo ubaceno u garazu za mehaniku";
+        }
     }
 
     async function MajstorRadiNaVozilu(majstor: any, vozilo: any)
@@ -111,7 +161,7 @@ import { debounceTime } from "rxjs/operators";
         debounceTime(Math.floor(Math.random()*3000)+2000);//random br izmedju 2000 i 5000
     }
 
-    async function PosaljiMajstoraDaRadi(majstor: { Zauzet: boolean; RadiNa: any; }, vozilo: { VrstaKvara: string; })
+    async function PosaljiMajstoraDaRadi(majstor: Majstor, vozilo: Vozilo)
     {
         majstor.Zauzet = true;
         majstor.RadiNa = vozilo;
@@ -145,6 +195,12 @@ import { debounceTime } from "rxjs/operators";
     
     function NadjiSlobodnogSegrta()
     {
-        console.log("slobodni: ", Segrti.map((segrti: Segrt) => segrti.Zauzet == false));
-        return Segrti.map((segrti: Segrt) => segrti.Zauzet == false);
+        console.log("slobodniSegrti: ", Segrti.filter((segrti: Segrt) => segrti.Zauzet == false));
+        return Segrti.filter((segrti: Segrt) => segrti.Zauzet == false);
+    }
+
+    function NadjiSlobodnogMajstora()
+    {
+        console.log("slobodniMajstori: ", Segrti.filter((m: Majstor) => m.Zauzet == false));
+        return Majstori.filter((m: Majstor) => m.Zauzet == false);
     }
