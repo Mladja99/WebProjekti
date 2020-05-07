@@ -4,14 +4,14 @@
             "Id" : "1",
             "Ime" : "Pera",
             "Poznaje" : "ecu, mehanika, elektrika",
-            "Zauzet" : "",
+            "Zauzet" : false,
             "RadiNa" : ""
         },
         {
             "Id" : "2",
             "Ime" : "Mika",
-            "Poznaje" : "ecu",
-            "Zauzet" : "",
+            "Poznaje" : "mehanika, limarija",
+            "Zauzet" : false,
             "RadiNa" : ""
         }
     ],
@@ -19,14 +19,44 @@
         {
             "Id" : "3",
             "Ime" : "Djoka",
-            "Zauzet" : "false",
+            "Zauzet" : false,
             "RadiNa" : ""
         },
         {
             "Id" : "4",
             "Ime" : "Laza",
-            "Zauzet" : "false",
+            "Zauzet" : false,
             "RadiNa" : ""
+        }
+    ],
+    "radionice":[
+        {
+            "Vozilo": null,
+            "Vrsta": "ecu",
+            "Zauzeto": false,
+            "Majstor": null,
+            "Segrt": null
+        },
+        {
+            "Vozilo": null,
+            "Vrsta": "elektrika",
+            "Zauzeto": false,
+            "Majstor": null,
+            "Segrt": null
+        },
+        {
+            "Vozilo": null,
+            "Vrsta": "mehanika",
+            "Zauzeto": false,
+            "Majstor": null,
+            "Segrt": null
+        },
+        {
+            "Vozilo": null,
+            "Vrsta": "limarija",
+            "Zauzeto": false,
+            "Majstor": null,
+            "Segrt": null
         }
     ],
     "vozila":[
@@ -35,7 +65,7 @@
             "Oznaka" : "E90",
             "Registracija" : "a111111",
             "VrstaKvara" : "ecu",
-            "OpisProblema" : "opisProblema",
+            "OpisProblema" : "",
             "Status" : ""
         },
         {
@@ -43,7 +73,7 @@
             "Oznaka" : "E46",
             "Registracija" : "a222222",
             "VrstaKvara" : "mehanika",
-            "OpisProblema" : "opisProblema",
+            "OpisProblema" : "",
             "Status" : ""
         },
         {
@@ -51,7 +81,7 @@
             "Oznaka" : "4",
             "Registracija" : "a333333",
             "VrstaKvara" : "mehanika",
-            "OpisProblema" : "opisProblema",
+            "OpisProblema" : "",
             "Status" : ""
         },
         {
@@ -59,7 +89,7 @@
             "Oznaka" : "Golf 4",
             "Registracija" : "a444444",
             "VrstaKvara" : "elektrika",
-            "OpisProblema" : "opisProblema",
+            "OpisProblema" : "",
             "Status" : ""
         },
         {
@@ -67,7 +97,7 @@
             "Oznaka" : "Chirocco",
             "Registracija" : "a555555",
             "VrstaKvara" : "elektrika",
-            "OpisProblema" : "opisProblema",
+            "OpisProblema" : "",
             "Status" : ""
         },
         {
@@ -75,7 +105,7 @@
             "Oznaka" : "Chirocco",
             "Registracija" : "a666666",
             "VrstaKvara" : "ecu",
-            "OpisProblema" : "opisProblema",
+            "OpisProblema" : "",
             "Status" : ""
         }
     ]

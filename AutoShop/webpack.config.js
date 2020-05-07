@@ -2,8 +2,8 @@ const path = require('path');
 
 module.exports = {
   mode: 'development',
-  //entry: ['babel-polyfill','./src/service.ts'],
-  entry: './src/servis.ts',
+  //entry: ['babel-polyfill','./index.ts'],
+  entry: './index.ts',
   devtool: 'inline-source-map',
   module: {
     rules: [

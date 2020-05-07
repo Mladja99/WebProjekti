@@ -1,4 +1,6 @@
-
+import { vratiRadionice } from "./models/radionica.service"
+import { Radionica } from "./models/radionica";
+import { Vozilo } from "./models/vozilo";
 export class View
 {
     container: HTMLDivElement;
@@ -29,28 +31,50 @@ export class View
         this.mehanika.className = "mehanika";
         this.mainContainer.appendChild(this.mehanika);*/
 
-        this.crtajGarazu(this.mainContainer, "ecu");
+        /*this.crtajGarazu(this.mainContainer, "ecu");
         this.crtajGarazu(this.mainContainer, "elektrika");
-        this.crtajGarazu(this.mainContainer, "mehanika");
+        this.crtajGarazu(this.mainContainer, "mehanika");*/
+
+        this.crtajGarazu(this.mainContainer);
         
         parent.appendChild(this.container);
     }
 
-    crtajGarazu(path: { appendChild: (arg0: HTMLDivElement) => void; }, name: string)
+    crtajGarazu(path: HTMLDivElement)
     {
-        const garaza = document.createElement("div");
-        garaza.className = name; // div cele garaze
-        const header = document.createElement("div");
-        header.className = "header";// div za naslov garaze
-        const naslov = document.createElement("h3");
-        naslov.innerHTML = name + " garaza";
-        header.appendChild(naslov); // dodavanje teksta za naslov garaze
-        const data = document.createElement("div");
-        data.className = "data"; // div za podatke o vozilima
-        //nekako moram da menjam podatke kasnije
-        garaza.appendChild(header);
+        vratiRadionice().then((radionice) => 
+            radionice.forEach((radionica: Radionica) => {
+                const garaza = document.createElement("div");// div cele garaze
+                garaza.className = "garaza"; 
+                const header = document.createElement("div");
+                header.className = "header";// div za naslov garaze
+                const naslov = document.createElement("h3");
+                naslov.innerHTML = radionica.Vrsta + " garaza";
+                header.appendChild(naslov); // dodavanje teksta za naslov garaze
+                const data = document.createElement("div");
+                data.id = radionica.Vrsta;
+                data.className = "voziloData"; // div za podatke o vozilima
+                //ovde ce da budu podaci o vozilu
+                garaza.appendChild(header);
+                garaza.appendChild(data);
+                path.appendChild(garaza);
+            })
+        )
+        
+    }
+
+    crtajVozilo(vozilo:Vozilo)
+    {
+        const garaza = document.getElementById(vozilo.VrstaKvara);
+        const data = document.createElement("ul");
+        var podatak = document.createElement("li");
+        podatak.innerHTML = vozilo.Marka;
+        data.appendChild(podatak);
+        podatak.innerHTML = vozilo.Oznaka;
+        data.appendChild(podatak);
+        podatak.innerHTML = vozilo.Registracija;
+        data.appendChild(podatak);
         garaza.appendChild(data);
-        path.appendChild(garaza);
     }
     
 }
