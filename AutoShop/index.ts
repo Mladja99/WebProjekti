@@ -3,10 +3,10 @@ import {Glavna} from "./src/servis"
 import { Observable, of } from "rxjs";
 import { Vozilo } from "./src/models/vozilo";
 import { vratiVozila } from "./src/models/vozila.service";
-import { debounceTime , merge} from "rxjs/operators";
+import { debounceTime , merge, switchMap} from "rxjs/operators";
 const view = new View(document.body);
 
-var SvaVozila: Vozilo[] = []
+/*var SvaVozila: Vozilo[] = []
     vratiVozila().then(SvaVozila => {
         console.log("Ucitano",SvaVozila);
     });
@@ -18,13 +18,16 @@ var SvaVozila: Vozilo[] = []
             SvaVozila.push(voz);
         })
     });
-    console.log(SvaVozila);
-var vozilaObservable = Observable.create((observer: any) => {
-    SvaVozila.forEach(voz => {
-        console.log(voz);
-        debounceTime(Math.floor(Math.random()*3000)+2000);//random br izmedju 2000 i 5000
-        observer.next(voz);
-    })
+    console.log(SvaVozila);*/
+var vozilaObservable = Observable.create((observer: any) => {//probaj da namuvas switchMap()
+    vratiVozila().then((e:any) => e.forEach((voz:Vozilo) => {
+        setInterval(()=>{
+            console.log(voz);
+            var v = new Vozilo(voz["Marka"],voz["Oznaka"],voz["Registracija"],voz["VrstaKvara"],voz["OpisProblema"]);
+            //debounceTime(Math.floor(Math.random()*3000)+2000);//random br izmedju 2000 i 5000
+            observer.next(voz);
+        },Math.floor(Math.random()*3000)+2000);
+    }))
 });
 
 vozilaObservable.subscribe( //prepravi ga da bude bez svih vozila i koristi ovde da napravis klasu

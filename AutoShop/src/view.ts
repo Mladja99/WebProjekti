@@ -63,7 +63,8 @@ export class View
         
     }
 
-    crtajVozilo(vozilo:Vozilo)
+    //crtajVozilo(vozilo:Vozilo)
+    crtajVozilo = (vozilo:Vozilo) =>
     {
         const garaza = document.getElementById(vozilo.VrstaKvara);
         const data = document.createElement("ul");
