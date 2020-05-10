@@ -1,14 +1,14 @@
 export class Segrt
 {
-    Id: any;
-    Ime: any;
-    Zauzet: boolean;
-    RadiNa: any;
+    id: any;
+    ime: any;
+    zauzet: boolean;
+    radiNa: any;
     constructor(id: any, ime: any)
     {
-        this.Id = id;
-        this.Ime = ime;
-        this.Zauzet = false;
-        this.RadiNa = null;
+        this.id = id;
+        this.ime = ime;
+        this.zauzet = false;
+        this.radiNa = null;
     }
 }

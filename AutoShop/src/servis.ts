@@ -3,16 +3,18 @@ import { vratiMajstore} from "./models/majstori.service";
 import { Segrt } from "./models/segrt";
 import { vratiSegrte } from "./models/segrti.service";
 import { Vozilo } from "./models/vozilo";
-import { debounceTime, switchMap, take , merge, zip} from "rxjs/operators";
+import { debounceTime, delay } from "rxjs/operators";
 import { vratiRadionice } from "./models/radionica.service";
 import { Radionica } from "./models/radionica";
+import { interval } from "rxjs";
+const source = interval(100);
     var Majstori: Majstor[] = [];
     /*vratiMajstore().then(Majstori => {
         console.log("Ucitani majstori", Majstori);
     });*/
     vratiMajstore().then(data => {
         data.forEach((m: any) => {
-            var maj = new Majstor(m["Id"],m["Ime"],m["Poznaje"]);
+            var maj = new Majstor(m["id"],m["ime"],m["poznaje"]);
             Majstori.push(maj);
         })
     });
@@ -22,7 +24,7 @@ import { Radionica } from "./models/radionica";
     });*/
     vratiSegrte().then(data => {
         data.forEach((s: any) => {
-            var seg = new Segrt(s["Id"],s["Ime"]);
+            var seg = new Segrt(s["id"],s["ime"]);
             Segrti.push(seg);
         })
     });
@@ -30,29 +32,22 @@ import { Radionica } from "./models/radionica";
     var SveRadionice:Radionica[] = [];
     vratiRadionice().then(data => {
         data.forEach((v: any) => {
-            var voz = new Radionica(v["Vrsta"]);
+            var voz = new Radionica(v["vrsta"]);
             SveRadionice.push(voz);
         })
     });
-    //console.log(SvaVozila);
 
-    /*var vozilaObservable = Observable.create((observer: any) => {
-        SvaVozila.forEach(voz => {
-            console.log(voz);
-            debounceTime(Math.floor(Math.random()*3000)+2000);//random br izmedju 2000 i 5000
-            observer.next(voz); // ne znam sta ce vrati
-            //observer.next(voz as Vozilo);
-        });
-    });
-
-    vozilaObservable.subscribe(
-        //(x: Vozilo) => DolazakVozila(x),
-        (x: Vozilo) => Glavna(x),
-        (error: any) => console.log(error)
-    );*/
-
-    export async function Glavna(vozilo: Vozilo) //glavna funkcija koja pokrece sve
+    export async function Glavna(v: Vozilo) //glavna funkcija koja pokrece sve
     {
+        let rnd:number = Math.floor(Math.random()*5000)+5000;
+        let x:number = 0;
+        source.subscribe(() => {
+            if(x < rnd) x+=100; 
+        });
+            
+        console.log(VozilaNaCekanju);
+        var vozilo = new Vozilo(v["id"],v["marka"],v["oznaka"],v["registracija"],v["vrstaKvara"],v["opisProblema"]);
+        console.log(vozilo);
         var slobodniSegrti:Segrt[] = NadjiSlobodnogSegrta();
         if(slobodniSegrti == null)
         {
@@ -62,14 +57,13 @@ import { Radionica } from "./models/radionica";
         {
             if(DolazakVozila(vozilo))
             {
-                console.log("Segrt ubacuje vozilo");
-                console.log(await SegrtUbacujeVozilo(slobodniSegrti[0], vozilo));
-                console.log("Segrt ubacio");
+                await SegrtUbacujeVozilo(slobodniSegrti[0], vozilo);
 
                 var slobodniMajtsori:Majstor[] = NadjiSlobodnogMajstora();
                 if(slobodniMajtsori!=null)
                 {
-                    console.log(await PosaljiMajstoraDaRadi(slobodniMajtsori[0],vozilo));
+                    console.log("Majstor" + slobodniMajtsori[0]);
+                    await PosaljiMajstoraDaRadi(slobodniMajtsori[0],vozilo);
                 }
                 await SegrtIzbacujeVozilo(slobodniSegrti[0], vozilo);
                 OdlazakVozila(vozilo);
@@ -84,12 +78,12 @@ import { Radionica } from "./models/radionica";
         if(VozilaNaCekanju != null)
         {
             VozilaNaCekanju.forEach((element: Vozilo) => { //proverava da li ima neko vozilo koje ceka za istu radionicu
-                if(vozilo.VrstaKvara == element.VrstaKvara) j++;
+                if(vozilo.vrstaKvara == element.vrstaKvara) j++;
             });
-            j = VozilaNaCekanju.filter((voz:Vozilo) => voz.VrstaKvara == vozilo.VrstaKvara).map((v:Vozilo) => 1).reduce((acc,val)=> acc+val);//broj ponavljanja istih vrsta kvarova
+            j = VozilaNaCekanju.filter((voz:Vozilo) => voz.vrstaKvara == vozilo.vrstaKvara).map((v:Vozilo) => 1).reduce((acc,val)=> acc+val);//broj ponavljanja istih vrsta kvarova
         }        
         return new Promise((resolve,reject) =>{
-            if(j==0 && !ProveriZauzeto(vozilo.VrstaKvara))
+            if(j==0 && !ProveriZauzeto(vozilo.vrstaKvara))
                 return resolve(true);
             else
                 return reject(false);
@@ -105,16 +99,22 @@ import { Radionica } from "./models/radionica";
 
     async function SegrtUbacujeVozilo(segrt: Segrt, vozilo: Vozilo)
     {
-        segrt.Zauzet = true;
+        segrt.zauzet = true;
         SveRadionice.forEach(rad => {
-            if(rad.Vrsta == vozilo.VrstaKvara)
+            if(rad.vrsta == vozilo.vrstaKvara)
             {
-                rad.Zauzeto = true;
-                debounceTime(Math.floor(Math.random()*3000)+2000);//random br izmedju 2000 i 5000
-                crtajVozilo(vozilo);
+                rad.Zauzeto = true;       
+
+                let rnd:number = Math.floor(Math.random()*5000)+5000;
+                let x:number = 0;
+                source.subscribe(() => {
+                    if(x < rnd) x+=100; 
+                });
+
                 rad.Vozilo = vozilo;
-                segrt.Zauzet = false;
-                return "vozilo ubaceno u garazu za "+ rad.Vrsta;
+                segrt.zauzet = false;
+                crtajVozilo(vozilo);
+                return "vozilo ubaceno u garazu za "+ rad.vrsta;
             }
         });        
     }
@@ -123,74 +123,88 @@ import { Radionica } from "./models/radionica";
     {
         segrt.Zauzet = true;
         SveRadionice.forEach(rad => {
-            if(rad.Vrsta == vozilo.VrstaKvara)
+            if(rad.vrsta == vozilo.VrstaKvara)
             {
-                debounceTime(Math.floor(Math.random()*3000)+2000);//random br izmedju 2000 i 5000
+                //debounceTime(Math.floor(Math.random()*3000)+2000);//random br izmedju 2000 i 5000
+                //delay(Math.floor(Math.random()*3000)+2000);
+                let rnd:number = Math.floor(Math.random()*5000)+5000;
+                let x:number = 0;
+                source.subscribe(() => {
+                if(x < rnd) x+=100; 
+                });
+                brisiVozilo(rad.vrsta);
                 rad.Zauzeto = false;
                 rad.Vozilo = null;
                 segrt.Zauzet = false;
-                return "vozilo je izbaceno iz garaze za " + rad.Vrsta;
+                return "vozilo je izbaceno iz garaze za " + rad.vrsta;
             }
         });
     }
 
     async function MajstorRadiNaVozilu(majstor: any)
     {
-        //odradi pipe da se prikaze na stranici
+        //prikazi nekako da radi
         console.log("majstor poceo sa radom");
-        debounceTime(Math.floor(Math.random()*3000)+2000);//random br izmedju 2000 i 5000
+        //debounceTime(Math.floor(Math.random()*3000)+2000);//random br izmedju 2000 i 5000
+        //delay(Math.floor(Math.random()*3000)+2000);
+        let rnd:number = Math.floor(Math.random()*5000)+5000;
+        let x:number = 0;
+        source.subscribe(() => {
+            if(x < rnd) x+=100; 
+        });
         console.log("majstor je zavrsio sa radom");
     }
 
     async function PosaljiMajstoraDaRadi(majstor: Majstor, vozilo: Vozilo)
     {
-        majstor.Zauzet = true;
-        majstor.RadiNa = vozilo;
+        console.log("u funkciji:",majstor);
+        majstor.zauzet = true;
+        majstor.radiNa = vozilo;
         SveRadionice.forEach(rad => {
-            if(rad.Vrsta == vozilo.VrstaKvara)
+            if(rad.vrsta == vozilo.vrstaKvara)
             {
                 //rad.Vozilo = vozilo;
                 rad.Majstor = majstor;
             }
         });
         await MajstorRadiNaVozilu(majstor)
-        majstor.RadiNa = null;
-        majstor.Zauzet = false;
+        majstor.radiNa = null;
+        majstor.zauzet = false;
         return "Majstor zavrsio sa radom";
     }
 
     function ProveriZauzeto(VrstaKvara: string)
     {
         SveRadionice.forEach(rad => {
-            if(rad.Vrsta == VrstaKvara)
+            if(rad.vrsta == VrstaKvara)
             {
                 return rad.Zauzeto;
             }
         });
-        return true;//morao sam da stavim da ne gleda funkciju kao void, ne znam zasto
+        return false;//morao sam da stavim da ne gleda funkciju kao void, ne znam zasto
     }
     
     function NadjiSlobodnogSegrta()
     {
-        console.log("slobodniSegrti: ", Segrti.filter((segrti: Segrt) => segrti.Zauzet == false));
-        return Segrti.filter((segrti: Segrt) => segrti.Zauzet == false);
+        console.log("slobodniSegrti: ", Segrti.filter((segrti: Segrt) => segrti.zauzet == false));
+        return Segrti.filter((segrti: Segrt) => segrti.zauzet == false);
     }
 
     function NadjiSlobodnogMajstora()
     {
-        console.log("slobodniMajstori: ", Segrti.filter((m: Majstor) => m.Zauzet == false));
-        return Majstori.filter((m: Majstor) => m.Zauzet == false);
+        console.log("slobodniMajstori: ", Majstori.filter((m: Majstor) => m.zauzet == false));
+        return Majstori.filter((m: Majstor) => m.zauzet == false);
     }
 
     async function pustiSaRedaCekanja()
     {
         let slobodne:string[] = SveRadionice.filter((r:Radionica) => r.Zauzeto == false)
-        .map((rad:Radionica) => rad.Vrsta);
+        .map((rad:Radionica) => rad.vrsta);
         if(slobodne != null && VozilaNaCekanju != null)
         {
             slobodne.forEach((s:string) => {
-                let voz = VozilaNaCekanju.filter((v:Vozilo) => v.VrstaKvara == s)[0];
-                VozilaNaCekanju = VozilaNaCekanju.filter((v:Vozilo) => v.Registracija != voz.Registracija);
+                let voz = VozilaNaCekanju.filter((v:Vozilo) => v.vrstaKvara == s)[0];
+                VozilaNaCekanju = VozilaNaCekanju.filter((v:Vozilo) => v.registracija != voz.registracija);
                 Glavna(voz);
             })
         }
@@ -199,14 +213,25 @@ import { Radionica } from "./models/radionica";
     //crtajVozilo(vozilo:Vozilo)
     function crtajVozilo(vozilo:Vozilo)
     {
-        const garaza = document.getElementById(vozilo.VrstaKvara);
+        const garaza = document.getElementById(vozilo.vrstaKvara);
         const data = document.createElement("ul");
-        var podatak = document.createElement("li");
-        podatak.innerHTML = vozilo.Marka;
+        const podatak = document.createElement("li");
+        podatak.innerHTML = vozilo.marka;
         data.appendChild(podatak);
-        podatak.innerHTML = vozilo.Oznaka;
-        data.appendChild(podatak);
-        podatak.innerHTML = vozilo.Registracija;
-        data.appendChild(podatak);
+        const podatak2 = document.createElement("li");
+        podatak2.innerHTML = vozilo.oznaka;
+        data.appendChild(podatak2);
+        const podatak3 = document.createElement("li");
+        podatak3.innerHTML = vozilo.registracija;
+        data.appendChild(podatak3);
         garaza.appendChild(data);
+    }
+
+    function brisiVozilo(radionica : string)
+    {
+        const garaza = document.getElementById(radionica);
+        console.log("dete na garazu");
+        console.log(garaza.children);
+        console.log(Math.floor(Math.random()*3000)+2000);
+        garaza.removeChild(garaza.childNodes[0]);
     }

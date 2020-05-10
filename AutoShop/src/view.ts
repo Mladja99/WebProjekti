@@ -49,10 +49,10 @@ export class View
                 const header = document.createElement("div");
                 header.className = "header";// div za naslov garaze
                 const naslov = document.createElement("h3");
-                naslov.innerHTML = radionica.Vrsta + " garaza";
+                naslov.innerHTML = radionica.vrsta + " garaza";
                 header.appendChild(naslov); // dodavanje teksta za naslov garaze
                 const data = document.createElement("div");
-                data.id = radionica.Vrsta;
+                data.id = radionica.vrsta;
                 data.className = "voziloData"; // div za podatke o vozilima
                 //ovde ce da budu podaci o vozilu
                 garaza.appendChild(header);
@@ -66,14 +66,14 @@ export class View
     //crtajVozilo(vozilo:Vozilo)
     crtajVozilo = (vozilo:Vozilo) =>
     {
-        const garaza = document.getElementById(vozilo.VrstaKvara);
+        const garaza = document.getElementById(vozilo.vrstaKvara);
         const data = document.createElement("ul");
         var podatak = document.createElement("li");
-        podatak.innerHTML = vozilo.Marka;
+        podatak.innerHTML = vozilo.marka;
         data.appendChild(podatak);
-        podatak.innerHTML = vozilo.Oznaka;
+        podatak.innerHTML = vozilo.oznaka;
         data.appendChild(podatak);
-        podatak.innerHTML = vozilo.Registracija;
+        podatak.innerHTML = vozilo.registracija;
         data.appendChild(podatak);
         garaza.appendChild(data);
     }

@@ -1,17 +1,17 @@
 export class Majstor
 {
-    Id: any;
-    Ime: any;
-    Poznaje: any;
-    Zauzet: boolean;
-    RadiNa: any;
+    id: any;
+    ime: any;
+    poznaje: any;
+    zauzet: boolean;
+    radiNa: any;
     
     constructor(id: any, ime: any, poznaje: any)
     {
-        this.Id = id;
-        this.Ime = ime;
-        this.Poznaje = poznaje;
-        this.Zauzet = false;
-        this.RadiNa = null;
+        this.id = id;
+        this.ime = ime;
+        this.poznaje = poznaje;
+        this.zauzet = false;
+        this.radiNa = null;
     }    
 }

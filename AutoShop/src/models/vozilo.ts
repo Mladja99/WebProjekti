@@ -1,18 +1,19 @@
 export class Vozilo
 {
-    Marka: any;
-    Oznaka: any;
-    Registracija: any;
-    VrstaKvara: any;
-    OpisProblema: any;
-    Status: string;
-    constructor(marka:any, oznaka:any, registracija:any, vrstaKvara:any, opisProblema:any)
+    id: number;
+    marka: any;
+    oznaka: any;
+    registracija: any;
+    vrstaKvara: any;
+    opisProblema: any;
+    status: string;
+    constructor(id:number, marka:any, oznaka:any, registracija:any, vrstaKvara:any, opisProblema:any)
     {
-        this.Marka = marka;
-        this.Oznaka = oznaka;
-        this.Registracija = registracija;
-        this.VrstaKvara = vrstaKvara;
-        this.OpisProblema = opisProblema;
-        this.Status = "Na cekanju";
+        this.marka = marka;
+        this.oznaka = oznaka;
+        this.registracija = registracija;
+        this.vrstaKvara = vrstaKvara;
+        this.opisProblema = opisProblema;
+        this.status = "Na cekanju";
     }
 }

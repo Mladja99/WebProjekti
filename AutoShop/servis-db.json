@@ -1,112 +1,118 @@
 {
     "majstori":[
         {
-            "Id" : "1",
-            "Ime" : "Pera",
-            "Poznaje" : "ecu, mehanika, elektrika",
-            "Zauzet" : false,
-            "RadiNa" : ""
+            "id" : "1",
+            "ime" : "Pera",
+            "poznaje" : "ecu, mehanika, elektrika",
+            "zauzet" : false,
+            "radiNa" : ""
         },
         {
-            "Id" : "2",
-            "Ime" : "Mika",
-            "Poznaje" : "mehanika, limarija",
-            "Zauzet" : false,
-            "RadiNa" : ""
+            "id" : "2",
+            "ime" : "Mika",
+            "poznaje" : "mehanika, limarija",
+            "zauzet" : false,
+            "radiNa" : ""
         }
     ],
     "segrti":[
         {
-            "Id" : "3",
-            "Ime" : "Djoka",
-            "Zauzet" : false,
-            "RadiNa" : ""
+            "id" : "3",
+            "ime" : "Djoka",
+            "zauzet" : false,
+            "radiNa" : ""
         },
         {
-            "Id" : "4",
-            "Ime" : "Laza",
-            "Zauzet" : false,
-            "RadiNa" : ""
+            "id" : "4",
+            "ime" : "Laza",
+            "zauzet" : false,
+            "radiNa" : ""
         }
     ],
     "radionice":[
         {
-            "Vozilo": null,
-            "Vrsta": "ecu",
-            "Zauzeto": false,
-            "Majstor": null,
-            "Segrt": null
+            "vozilo": null,
+            "vrsta": "ecu",
+            "zauzeto": false,
+            "majstor": null,
+            "segrt": null
         },
         {
-            "Vozilo": null,
-            "Vrsta": "elektrika",
-            "Zauzeto": false,
-            "Majstor": null,
-            "Segrt": null
+            "vozilo": null,
+            "vrsta": "elektrika",
+            "zauzeto": false,
+            "majstor": null,
+            "segrt": null
         },
         {
-            "Vozilo": null,
-            "Vrsta": "mehanika",
-            "Zauzeto": false,
-            "Majstor": null,
-            "Segrt": null
+            "vozilo": null,
+            "vrsta": "mehanika",
+            "zauzeto": false,
+            "majstor": null,
+            "segrt": null
         },
         {
-            "Vozilo": null,
-            "Vrsta": "limarija",
-            "Zauzeto": false,
-            "Majstor": null,
-            "Segrt": null
+            "vozilo": null,
+            "vrsta": "limarija",
+            "zauzeto": false,
+            "majstor": null,
+            "segrt": null
         }
     ],
     "vozila":[
         {
-            "Marka" : "BMW",
-            "Oznaka" : "E90",
-            "Registracija" : "a111111",
-            "VrstaKvara" : "ecu",
-            "OpisProblema" : "",
-            "Status" : ""
+            "id" : 1,
+            "marka" : "BMW",
+            "oznaka" : "E90",
+            "registracija" : "a111111",
+            "vrstaKvara" : "ecu",
+            "opisProblema" : "",
+            "status" : ""
         },
         {
-            "Marka" : "BMW",
-            "Oznaka" : "E46",
-            "Registracija" : "a222222",
-            "VrstaKvara" : "mehanika",
-            "OpisProblema" : "",
-            "Status" : ""
+            "id" : 2,
+            "marka" : "BMW",
+            "oznaka" : "E46",
+            "registracija" : "a222222",
+            "vrstaKvara" : "mehanika",
+            "opisProblema" : "",
+            "status" : ""
         },
         {
-            "Marka" : "Renault",
-            "Oznaka" : "4",
-            "Registracija" : "a333333",
-            "VrstaKvara" : "mehanika",
-            "OpisProblema" : "",
-            "Status" : ""
+            "id" : 3,
+            "marka" : "Renault",
+            "oznaka" : "4",
+            "registracija" : "a333333",
+            "vrstaKvara" : "mehanika",
+            "opisProblema" : "",
+            "status" : ""
         },
         {
-            "Marka" : "Volkswagen",
-            "Oznaka" : "Golf 4",
-            "Registracija" : "a444444",
-            "VrstaKvara" : "elektrika",
-            "OpisProblema" : "",
-            "Status" : ""
+            "id" : 4,
+            "marka" : "Volkswagen",
+            "oznaka" : "Golf 4",
+            "registracija" : "a444444",
+            "vrstaKvara" : "elektrika",
+            "opisProblema" : "",
+            "status" : ""
         },
         {
-            "Marka" : "Volksvagen",
-            "Oznaka" : "Chirocco",
-            "Registracija" : "a555555",
-            "VrstaKvara" : "elektrika",
-            "OpisProblema" : "",
-            "Status" : ""
+            "id" : 5,
+            "marka" : "Volksvagen",
+            "oznaka" : "Chirocco",
+            "registracija" : "a555555",
+            "vrstaKvara" : "elektrika",
+            "opisProblema" : "",
+            "status" : ""
         },
         {
-            "Marka" : "Volksvagen",
-            "Oznaka" : "Chirocco",
-            "Registracija" : "a666666",
-            "VrstaKvara" : "ecu",
-            "OpisProblema" : "",
-            "Status" : ""
+            "id" : 6,
+            "marka" : "Volksvagen",
+            "oznaka" : "Chirocco",
+            "registracija" : "a666666",
+            "vrstaKvara" : "ecu",
+            "opisProblema" : "",
+            "status" : ""
         }
     ]
 }
