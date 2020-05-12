@@ -13,27 +13,14 @@ export class View
 
         this.header = document.createElement("div");
         this.header.className = "header";
+        var naslov = document.createElement("h2");
+        naslov.innerHTML = "Servis vozila";
+        this.header.appendChild(naslov);
         this.container.appendChild(this.header);
 
         this.mainContainer = document.createElement("div");
         this.mainContainer.className = "main";
         this.container.appendChild(this.mainContainer);
-
-        /*this.ecu = document.createElement("div");
-        this.ecu.className = "ecu";
-        this.mainContainer.appendChild(this.ecu);
-
-        this.elektrika = document.createElement("div");
-        this.elektrika.className = "elektrika";
-        this.mainContainer.appendChild(this.elektrika);
-
-        this.mehanika = document.createElement("div");
-        this.mehanika.className = "mehanika";
-        this.mainContainer.appendChild(this.mehanika);*/
-
-        /*this.crtajGarazu(this.mainContainer, "ecu");
-        this.crtajGarazu(this.mainContainer, "elektrika");
-        this.crtajGarazu(this.mainContainer, "mehanika");*/
 
         this.crtajGarazu(this.mainContainer);
         
@@ -47,7 +34,7 @@ export class View
                 const garaza = document.createElement("div");// div cele garaze
                 garaza.className = "garaza"; 
                 const header = document.createElement("div");
-                header.className = "header";// div za naslov garaze
+                header.className = "gheader";// div za naslov garaze
                 const naslov = document.createElement("h3");
                 naslov.innerHTML = radionica.vrsta + " garaza";
                 header.appendChild(naslov); // dodavanje teksta za naslov garaze
@@ -63,19 +50,19 @@ export class View
         
     }
 
-    //crtajVozilo(vozilo:Vozilo)
-    crtajVozilo = (vozilo:Vozilo) =>
-    {
-        const garaza = document.getElementById(vozilo.vrstaKvara);
-        const data = document.createElement("ul");
-        var podatak = document.createElement("li");
-        podatak.innerHTML = vozilo.marka;
-        data.appendChild(podatak);
-        podatak.innerHTML = vozilo.oznaka;
-        data.appendChild(podatak);
-        podatak.innerHTML = vozilo.registracija;
-        data.appendChild(podatak);
-        garaza.appendChild(data);
-    }
+    // //crtajVozilo(vozilo:Vozilo)
+    // crtajVozilo = (vozilo:Vozilo) =>
+    // {
+    //     const garaza = document.getElementById(vozilo.vrstaKvara);
+    //     const data = document.createElement("ul");
+    //     var podatak = document.createElement("li");
+    //     podatak.innerHTML = vozilo.marka;
+    //     data.appendChild(podatak);
+    //     podatak.innerHTML = vozilo.oznaka;
+    //     data.appendChild(podatak);
+    //     podatak.innerHTML = vozilo.registracija;
+    //     data.appendChild(podatak);
+    //     garaza.appendChild(data);
+    // }
     
 }

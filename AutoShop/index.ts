@@ -1,15 +1,13 @@
 import { View } from "./src/view";
-import { Glavna } from "./src/servis"
+import { DolazakVozila } from "./src/servis"
 import { Vozilo } from "./src/models/vozilo";
 import { vratiVozila, getVoziloByReg } from "./src/models/vozila.service";
-import { merge , asyncScheduler, from, interval } from "rxjs";
-import { switchMap, debounceTime, zip, delay } from "rxjs/operators";
-
+import { merge , asyncScheduler, from, interval, timer } from "rxjs";
+import { switchMap, debounceTime, zip, delay, takeUntil, take } from "rxjs/operators";
+const css = require('./style.css');
 const view = new View(document.body);
 
- var timeout = Math.floor(Math.random()*5000)+5000;
-const source = interval(100);
-
+const source = interval(Math.floor(Math.random()*6000)+2000);
 var SvaVozila = merge(vratiVozila().then((e:any)=> e.map((x:any) => x["registracija"])));
 var vozilaObservable = from(SvaVozila);
 
@@ -38,22 +36,16 @@ vozilaObservable.pipe(
 
 async function ProslediUServis(vozila : any)
 {   
-    for await(const vozilo of vozila)
-    {
-        debounceTime(5000);
-        await Glavna(vozilo);
-    }
-    /*let i = 1;
-    vozila.forEach((vozilo:Vozilo) => {
-        setTimeout(() => Glavna(vozilo),2000*i);
-        i++;
-    });*/
+
+    
+    let i = 0;
+    //var timer$ = timer(Math.floor(Math.random()*5000)+5000);
+    const pauza = source.pipe(take(vozila["length"]));
+    pauza.subscribe((x:any) => {
+            DolazakVozila(vozila[x]);
+        });//ovo nekim cudom radi samo da napravim da nije konstantan broj
 
 }
-
-/*SvaVozila.pipe(
-    switchMap(reg => getVoziloByReg(reg)),
-).subscribe(v => console.log(v));*/
 
 //ubaci nesto preko input da iskoristis take takeUntil(do nekog klika 
 //ili napravi limit da radi posle toga da prekine 

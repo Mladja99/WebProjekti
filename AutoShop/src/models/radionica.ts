@@ -3,17 +3,17 @@ import { Majstor } from "./majstor";
 import { Segrt } from "./segrt";
 export class Radionica
 {
-    Vozilo: any;
+    vozilo: any;
     vrsta: any;
-    Zauzeto: boolean;
-    Majstor: any;
-    Segrt: any;
+    zauzeto: boolean;
+    majstor: any;
+    segrt: any;
     constructor(vrsta:any)
     {
-        this.Vozilo = null;
+        this.vozilo = null;
         this.vrsta = vrsta;
-        this.Zauzeto = false;
-        this.Majstor = null;
-        this.Segrt = null;
+        this.zauzeto = false;
+        this.majstor = null;
+        this.segrt = null;
     }
 }

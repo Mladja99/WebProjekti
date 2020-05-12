@@ -1,0 +1,41 @@
+.container{
+    width: 90%;
+    background-color: lightgray;
+    margin: auto;
+    border: 1px solid gray;
+    box-shadow: 5px 10px #888888;
+}
+
+.header{
+    width: 90%;
+    height: 50px;
+    align-content: center;
+    background-color: rgb(149, 248, 248);
+    justify-content: center;
+    align-items: center;;
+    border: 1px solid gray;
+}
+
+.header > h2{
+    width: fit-content;
+    justify-self: center;
+
+}
+
+.main{
+    display: flex;
+    flex-wrap: wrap;
+    background-color: rgb(184, 184, 184);
+}
+
+.gheader{
+    justify-content: center;
+    align-items: center;;
+}
+
+.garaza{
+    width: 40%;
+    height: 250px;
+    background-color: rgb(139, 139, 139);
+    margin: 20px;
+}
