@@ -12,6 +12,6 @@ export class Majstor
         this.ime = ime;
         this.poznaje = poznaje;
         this.zauzet = false;
-        this.radiNa = null;
+        this.radiNa = "";
     }    
 }

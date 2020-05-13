@@ -9,6 +9,6 @@ export class Segrt
         this.id = id;
         this.ime = ime;
         this.zauzet = false;
-        this.radiNa = null;
+        this.radiNa = "";
     }
 }

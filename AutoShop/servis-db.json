@@ -113,6 +113,78 @@
             "vrstaKvara" : "ecu",
             "opisProblema" : "",
             "status" : ""
+        },
+        {
+            "id" : 7,
+            "marka" : "Golf",
+            "oznaka" : "6",
+            "registracija" : "a777777",
+            "vrstaKvara" : "limarija",
+            "opisProblema" : "",
+            "status" : ""
+        },
+        {
+            "id" : 8,
+            "marka" : "BMW",
+            "oznaka" : "e30",
+            "registracija" : "a888888",
+            "vrstaKvara" : "limarija",
+            "opisProblema" : "",
+            "status" : ""
+        },
+        {
+            "id" : 9,
+            "marka" : "BMW",
+            "oznaka" : "e87",
+            "registracija" : "a999999",
+            "vrstaKvara" : "ecu",
+            "opisProblema" : "",
+            "status" : ""
+        },
+        {
+            "id" : 10,
+            "marka" : "audi",
+            "oznaka" : "a6",
+            "registracija" : "a101010",
+            "vrstaKvara" : "mehanika",
+            "opisProblema" : "",
+            "status" : ""
+        },
+        {
+            "id" : 11,
+            "marka" : "audi",
+            "oznaka" : "a3",
+            "registracija" : "a121212",
+            "vrstaKvara" : "elektrika",
+            "opisProblema" : "",
+            "status" : ""
+        },
+        {
+            "id" : 12,
+            "marka" : "nissan",
+            "oznaka" : "r35",
+            "registracija" : "a131313",
+            "vrstaKvara" : "ecu",
+            "opisProblema" : "",
+            "status" : ""
+        },
+        {
+            "id" : 13,
+            "marka" : "fiat",
+            "oznaka" : "punto",
+            "registracija" : "a141414",
+            "vrstaKvara" : "mehanika",
+            "opisProblema" : "",
+            "status" : ""
+        },
+        {
+            "id" : 14,
+            "marka" : "fiat",
+            "oznaka" : "punto",
+            "registracija" : "a151515",
+            "vrstaKvara" : "limarija",
+            "opisProblema" : "",
+            "status" : ""
         }
     ]
 }

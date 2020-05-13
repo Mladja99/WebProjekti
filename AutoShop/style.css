@@ -7,35 +7,70 @@
 }
 
 .header{
-    width: 90%;
-    height: 50px;
-    align-content: center;
+    display: flex;
+    flex-grow: 1;
+    height: 60px;
     background-color: rgb(149, 248, 248);
     justify-content: center;
-    align-items: center;;
+    align-items: center;
     border: 1px solid gray;
 }
 
 .header > h2{
     width: fit-content;
-    justify-self: center;
-
 }
 
 .main{
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     background-color: rgb(184, 184, 184);
 }
 
 .gheader{
+    display: flex;
+    height: 50px;
     justify-content: center;
-    align-items: center;;
+    border-bottom: 1px solid rgb(102, 102, 102);
 }
 
 .garaza{
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgb(102, 102, 102);
+    box-shadow: 3px 5px  rgb(102, 102, 102);
     width: 40%;
     height: 250px;
     background-color: rgb(139, 139, 139);
     margin: 20px;
+}
+
+.footer{
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(149, 248, 248);
+    border: 1px solid gray;
+}
+
+.radniciDiv{
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+}
+
+.zaRadnike{
+    flex-direction: column;
+    justify-content: center;
+    margin: 5px;
+}
+
+.lista{
+    display: flex;
+    flex-direction: row;
+    width: 80%;
+}
+
+.danas{
+    flex-grow: 1;
+    margin: 5%;
 }
