@@ -1,0 +1,45 @@
+{
+    "vehicles": [{  
+        "id": 1,  
+        "manufacturer": "BMW",
+        "type": "320i E90",
+        "plateNumber": "123123",
+        "description": ""  
+    }, {  
+        "id": 2,  
+        "manufacturer": "Nissan",  
+        "type": "GTR",
+        "plateNumber": "123123",
+        "description": ""  
+    }, {  
+        "id": 3,  
+        "manufacturer": "Toyota",  
+        "type": "GT 86",
+        "plateNumber": "123123",
+        "description": ""  
+    }, {  
+        "id": 4,  
+        "manufacturer": "BMW", 
+        "type": "325i E36",
+        "plateNumber": "123123",
+        "description": ""   
+    }, {  
+        "id": 5,  
+        "manufacturer": "BMW",
+        "type": "520d F10",
+        "plateNumber": "123123",
+        "description": ""  
+    }, {  
+        "id": 6,  
+        "manufacturer": "Subaru",  
+        "type": "BRZ",
+        "plateNumber": "123123",
+        "description": ""  
+    }, {  
+        "id": 7,  
+        "manufacturer": "Subaru", 
+        "type": "Impreza",
+        "plateNumber": "123123",
+        "description": ""  
+    }]  
+}
