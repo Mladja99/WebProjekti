@@ -1,6 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { CarServiceService } from '../../services/car-service.service';
 import { Vehicle } from '../../models/Vehicle';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-vehicle-item',
   templateUrl: './vehicle-item.component.html',
@@ -8,17 +9,22 @@ import { Vehicle } from '../../models/Vehicle';
 })
 export class VehicleItemComponent implements OnInit {
   @Input() vehicle: Vehicle;
-
-  constructor(private carService:CarServiceService) { }
+  @Output() deleteVehicle: EventEmitter<Vehicle> = new EventEmitter();
+  constructor(private carService:CarServiceService, private _router:Router) { }
 
   ngOnInit(): void {
   }
 
-  onToggle(){
-
+  onEdit(id:number){
+    // vehicle.description = 'Edited';
+    // this.carService.editVehicle(vehicle).subscribe(veh => console.log(veh));
+    this._router.navigate([`${"edit"}/${id}`]);
   }
 
-  onDelte(){
-    console.log('deleted');
+  onDelete(veh){
+    this.deleteVehicle.emit(veh);
+    this.carService.deleteVehicle(veh).subscribe(x => console.log(x));
   }
+
+  
 }

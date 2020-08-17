@@ -1,3 +1,8 @@
-<app-vehicle-item *ngFor="let vehicle of vehicles" [vehicle] = "vehicle">
-    
-</app-vehicle-item>
+<!DOCTYPE html>
+<head>
+</head>
+<body>
+    <app-vehicle-item *ngFor="let vehicle of vehicles" [vehicle] = "vehicle" (deleteVehicle) = "deleteVehicle($event)">
+
+    </app-vehicle-item>
+</body>

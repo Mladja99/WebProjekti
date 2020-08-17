@@ -2,4 +2,7 @@
     {{ vehicle.id }}
     {{ vehicle.manufacturer }}
     {{ vehicle.type }}
+    {{ vehicle.description }}
+    <button (click)="onEdit(vehicle.id)">Edit</button>
+    <button (click)="onDelete(vehicle)">Delete</button>
 </p>

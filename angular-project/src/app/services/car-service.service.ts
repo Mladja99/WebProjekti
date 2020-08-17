@@ -20,7 +20,25 @@ export class CarServiceService {
     return this.http.get<Vehicle[]>(this.vehicleUrl);
   }
 
-  //izmena vozila u bazi
+  //vrati vozilo po id
+  getSingleVehicle(id:number):Observable<Vehicle>{
+    const url:string = this.vehicleUrl+'/'+id;
+    return this.http.get<Vehicle>(url,httpOptions);
+  }
 
-
+  //izmeni vozilo u bazi
+  editVehicle(vehicle: Vehicle):Observable<any> {
+    const url:string = this.vehicleUrl+'/'+vehicle.id;
+    return this.http.put(url, vehicle, httpOptions);
+  }
+  //brisi bozilo u bazi
+  deleteVehicle(veh:Vehicle):Observable<any>{
+    const url:string = this.vehicleUrl + '/' + veh.id;
+    return this.http.delete<Vehicle>(url, httpOptions);
+  }
+  //dodaj novo vozilo
+  createVehicle(veh:Vehicle):Observable<any> {
+    const url:string = this.vehicleUrl;
+    return this.http.post(url, veh, httpOptions);
+  }
 }

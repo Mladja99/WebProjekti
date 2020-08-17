@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<head>
+    
+</head>
+<body>
+    <form class="form">
+        <div>
+            <!-- <label>Id vozila:</label>
+            <input type="number" name="vehicleId" [(ngModel)]> -->
+            <label>Proizvodjac(marka):</label>
+            <input type="text" name="vehicleManufacturer" [(ngModel)]="vehicle.manufacturer">
+            <label>tip vozila:</label>
+            <input type="text" name="vehicleType" [(ngModel)]="vehicle.type">
+            <label>Registarska oznaka:</label>
+            <input type="text" name="vehiclePlateNumber" [(ngModel)]="vehicle.plateNumber">
+            <label>Opis problema:</label>
+            <input type="text" name="vehicleDescription" [(ngModel)]="vehicle.description">
+            <button (click)="SaveEdit()">Save</button>
+            <input type="submit" value="Snimi">
+        </div>
+    </form>
+</body>
