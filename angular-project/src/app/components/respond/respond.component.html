@@ -1,0 +1,15 @@
+<div>
+    <label [(ngModel)] ="errorMessage"></label>
+    <br>
+    <label>Proizvodjac(marka):</label>
+    {{vehicle.manufacturer}}
+    <label>tip vozila:</label>
+    {{vehicle.type}}
+    <label>Registarska oznaka:</label>
+    {{vehicle.plateNumber}}
+    <label>Opis problema:</label>
+    <input type="text" name="vehicleDescription" [(ngModel)]="vehicle.description">
+    <label>Status:</label>
+    {{vehicle.status}}
+    <button (click)="respond()">Respond</button>
+</div>

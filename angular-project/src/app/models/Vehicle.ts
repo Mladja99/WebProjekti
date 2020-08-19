@@ -5,4 +5,6 @@ export class Vehicle
     type: string;
     plateNumber: string;
     description: string;
+    status: string;
+    statusType: number;
 }

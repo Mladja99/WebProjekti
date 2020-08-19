@@ -9,6 +9,7 @@ import { EditVehicleComponent } from './components/edit-vehicle/edit-vehicle.com
 import { FormsModule } from '@angular/forms';
 import { HomeComponent } from './components/home/home.component';
 import { CreateVehicleComponent } from './components/create-vehicle/create-vehicle.component';
+import { RespondComponent } from './components/respond/respond.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -16,7 +17,8 @@ import { CreateVehicleComponent } from './components/create-vehicle/create-vehic
     VehiclesComponent,
     EditVehicleComponent,
     HomeComponent,
-    CreateVehicleComponent
+    CreateVehicleComponent,
+    RespondComponent
   ],
   imports: [
     BrowserModule,

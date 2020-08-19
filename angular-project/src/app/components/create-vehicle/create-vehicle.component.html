@@ -1,7 +1,6 @@
 <div>
-    <form class="form">
-        <label>Id vozila:</label>
-        <input type="number" name="vehicleId" [(ngModel)]="vehicle.id">
+        <!-- <label>Id vozila:</label>
+        <input type="number" name="vehicleId" [(ngModel)]="vehicle.id"> -->
         <label>Proizvodjac(marka):</label>
         <input type="text" name="vehicleManufacturer" [(ngModel)]="vehicle.manufacturer">
         <label>tip vozila:</label>
@@ -11,6 +10,4 @@
         <label>Opis problema:</label>
         <input type="text" name="vehicleDescription" [(ngModel)]="vehicle.description">
         <button (click)="CreateVehicle()">Save</button>
-        <input type="submit" value="Snimi">
-    </form>
 </div>

@@ -15,8 +15,9 @@
             <input type="text" name="vehiclePlateNumber" [(ngModel)]="vehicle.plateNumber">
             <label>Opis problema:</label>
             <input type="text" name="vehicleDescription" [(ngModel)]="vehicle.description">
+            <label>Status:</label>
+            <label [(ngModel)]="vehicle.status"></label>
             <button (click)="SaveEdit()">Save</button>
-            <input type="submit" value="Snimi">
         </div>
     </form>
 </body>

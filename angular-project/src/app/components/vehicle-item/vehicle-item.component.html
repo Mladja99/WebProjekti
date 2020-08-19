@@ -3,6 +3,8 @@
     {{ vehicle.manufacturer }}
     {{ vehicle.type }}
     {{ vehicle.description }}
+    {{ vehicle.status }}
     <button (click)="onEdit(vehicle.id)">Edit</button>
     <button (click)="onDelete(vehicle)">Delete</button>
+    <button name="respondButton" (click)="onRespond(vehicle.id)">Respond</button>
 </p>

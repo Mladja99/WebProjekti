@@ -26,5 +26,7 @@ export class VehicleItemComponent implements OnInit {
     this.carService.deleteVehicle(veh).subscribe(x => console.log(x));
   }
 
-  
+  onRespond(id){
+    this._router.navigate([`${"respond"}/${id}`]);
+  }
 }
