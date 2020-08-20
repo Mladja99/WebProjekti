@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { Vehicle } from '../models/Vehicle';
 import { IdGenerator } from '../models/IdGenerator';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -16,6 +17,7 @@ export class CarServiceService {
 
   vehicleUrl:string = 'http://localhost:3000/vehicles';
   idGeneratorUrl:string = 'http://localhost:3000/idGenerator';
+  userUrl:string = 'http://localhost:3000/users';
 
   constructor(private http:HttpClient) { }
   //vrati vozila iz baze
@@ -57,5 +59,10 @@ export class CarServiceService {
     console.log("incrementGeneratorId", id, url);
     return this.http.put(url, id, httpOptions);
   }
-
+  //user login
+  login(username:string, password:string):Observable<any>
+  {
+    const url:string = this.userUrl + '?username=' + username + "&password=" + password;
+    return this.http.get(url,httpOptions);
+  }
 }

@@ -1,0 +1,12 @@
+/* You can add global styles to this file, and also import other style files */
+@import "./_variables.scss";
+@import "../node_modules/bootstrap/scss/bootstrap.scss"; 
+@import "../node_modules/bootswatch/dist/superhero/_bootswatch.scss";
+
+.ng-valid[required], .ng-valid.required  {
+    border-left: 5px solid $success; /* green */
+  }
+  
+  .ng-invalid:not(form)  {
+    border-left: 5px solid $danger; /* red */
+  }

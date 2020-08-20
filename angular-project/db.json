@@ -1,4 +1,33 @@
 {
+  "users": [
+    {
+      "id": 1,
+      "username": "mladja",
+      "password": "123123",
+      "role": 1
+    },
+    {
+      "headers": {
+        "normalizedNames": {},
+        "lazyUpdate": null
+      },
+      "id": 2
+    },
+    {
+      "headers": {
+        "normalizedNames": {},
+        "lazyUpdate": null
+      },
+      "id": 3
+    },
+    {
+      "headers": {
+        "normalizedNames": {},
+        "lazyUpdate": null
+      },
+      "id": 4
+    }
+  ],
   "idGenerator": [
     {
       "id": 0,
