@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-
+import { CookieService } from 'ngx-cookie-service'
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -8,10 +8,9 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
   title = 'angular-project';
-  constructor( private _router:Router){
+  constructor( private _router:Router, private cookie:CookieService){
   }
 
   ngOnInit(): void {
-    //this._router.navigate([`${"vehicles"}`]);
   }
 }

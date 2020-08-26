@@ -4,35 +4,32 @@
       "id": 1,
       "username": "mladja",
       "password": "123123",
-      "role": 1
+      "role": "admin"
+    } ,
+    {
+      "id": 7,
+      "password": "123123",
+      "username": "mladja99",
+      "role": "user"
     },
     {
-      "headers": {
-        "normalizedNames": {},
-        "lazyUpdate": null
-      },
-      "id": 2
+      "id": 8,
+      "password": "123",
+      "username": "mladja123123",
+      "role": "user"
     },
     {
-      "headers": {
-        "normalizedNames": {},
-        "lazyUpdate": null
-      },
-      "id": 3
-    },
-    {
-      "headers": {
-        "normalizedNames": {},
-        "lazyUpdate": null
-      },
-      "id": 4
+      "id": 9,
+      "password": "123123",
+      "username": "pera",
+      "role": "user"
     }
   ],
   "idGenerator": [
     {
       "id": 0,
       "vehicleId": 11,
-      "userId": 0
+      "userId": 10
     }
   ],
   "vehicles": [

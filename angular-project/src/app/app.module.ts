@@ -13,6 +13,7 @@ import { CreateVehicleComponent } from './components/create-vehicle/create-vehic
 import { RespondComponent } from './components/respond/respond.component';
 import { AuthModule } from './auth/auth.module';
 import { HeaderComponent } from './components/header/header.component';
+import { CookieService } from 'ngx-cookie-service'
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,7 +33,9 @@ import { HeaderComponent } from './components/header/header.component';
     NgbModule,
     AuthModule
   ],
-  providers: [],
+  providers: [
+    CookieService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

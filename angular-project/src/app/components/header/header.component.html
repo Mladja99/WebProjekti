@@ -1,13 +1,7 @@
-<!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" hraf="#"><i class="fas fa-user-clock">CLOCK IT HUB</i></a>
-</nav>> -->
-<!-- <ng-progress id="progressBar"
-             [color]="progressBar.currentColor"
-             [thick]="true"></ng-progress>
-<ngx-alerts></ngx-alerts> -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand"
-       [routerLink]="['']"><i class="fas fa-user-clock"></i> AUTO SERVIS</a>
+    <a class="navbar-brand" [routerLink]="['']">AUTO SERVIS</a>
+    <a class="nav-link" [routerLink]="['vehicles']" routerLinkActive="active" *ngIf="carService.loggedIn();">Vehicles</a>
+    <a class="nav-link" [routerLink]="['create']" routerLinkActive="active" *ngIf="carService.loggedIn();">Create</a>
     <button class="navbar-toggler"
             type="button"
             data-toggle="collapse"
@@ -20,41 +14,27 @@
     <div class="collapse navbar-collapse"
          id="navbarNav">
         <ul class="navbar-nav ml-auto headerNav">
-             <!-- *ngIf="!authService.loggedIn();"> -->
-             <!-- *ngIf="!authService.loggedIn();"> -->
-             <!-- *ngIf="authService.loggedIn();" -->
-            <li class="nav-item">
-               
+            <li class="nav-item" *ngIf="!carService.loggedIn();">
                 <a class="nav-link" [routerLink]="['register']" routerLinkActive="active">Register</a>
             </li>
-            <li class="nav-item">
-                
+            <li class="nav-item" *ngIf="!carService.loggedIn();">
                 <a class="nav-link" [routerLink]="['login']" routerLinkActive="active">Login</a>
             </li>
-            <!-- <li class="nav-item dropdown profile-dropdown-container"
-                
+            <li class="navbar-nav ml-auto headerNav"
+                *ngIf="carService.loggedIn();"
                 dropdown>
-                <span>
-                    <img src="{{authService.currentUser?.profileImageUrl}}"
-                         alt="Profile Image">
-                </span> 
-                <a class="nav-link"
-                   dropdownToggle>
-                     Welcome {{authService.decodedToken?.unique_name}}
-                    Welcome user
+                <a class="nav-link">
+                     Welcome {{carService.currentUser?.username}}
                 </a>
-                <div class="dropdown-menu dropdown-menu-right"
-                     *dropdownMenu>
-                    <a class="dropdown-item"
-                       [routerLink]="['reset-password']"
-                       routerLinkActive="active"><i class="fas fa-key"></i> Reset Password</a>
-                    <a class="dropdown-item"
-                       [routerLink]="['employer-edit']"
-                       routerLinkActive="active"><i class="fas fa-user-edit"></i> Edit Profile</a>
-                    <a class="dropdown-item"
-                       (click)="logout();"><i class="fas fa-sign-out-alt"></i> Logout</a>
-                </div>
-            </li> -->
+                <!-- <a class="dropdown-item"
+                    [routerLink]="['reset-password']"
+                    routerLinkActive="active"><i class="fas fa-key"></i> Reset Password</a>
+                <a class="dropdown-item"
+                    [routerLink]="['employer-edit']"
+                    routerLinkActive="active"><i class="fas fa-user-edit"></i> Edit Profile</a> -->
+                <a class="nav-link"
+                    (click)="logout();">Logout</a>
+            </li>
 
         </ul>
     </div>
