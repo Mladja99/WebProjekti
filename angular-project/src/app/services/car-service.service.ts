@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { Vehicle } from '../models/Vehicle';
-import { IdGenerator } from '../models/IdGenerator';
 import { Observable } from 'rxjs';
 import { User } from '../models/User';
 import { CookieService } from 'ngx-cookie-service';
+import { v4 as uuid } from 'uuid';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -17,7 +17,6 @@ const httpOptions = {
 export class CarServiceService {
 
   vehicleUrl:string = 'http://localhost:3000/vehicles';
-  idGeneratorUrl:string = 'http://localhost:3000/idGenerator';
   userUrl:string = 'http://localhost:3000/users';
   currentUser:User = null;
 
@@ -28,7 +27,7 @@ export class CarServiceService {
   }
 
   //vrati vozilo po id
-  getSingleVehicle(id:number):Observable<Vehicle>{
+  getSingleVehicle(id:string):Observable<Vehicle>{
     const url:string = this.vehicleUrl+'/'+id;
     return this.http.get<Vehicle>(url,httpOptions);
   }
@@ -39,27 +38,14 @@ export class CarServiceService {
     return this.http.put(url, vehicle, httpOptions);
   }
   //brisi bozilo u bazi
-  deleteVehicle(veh:Vehicle):Observable<any>{
-    const url:string = this.vehicleUrl + '/' + veh.id;
-    return this.http.delete<Vehicle>(url, httpOptions);
+  deleteVehicle(id:string):Observable<any>{
+    const url:string = this.vehicleUrl + '/' + id;
+    return this.http.delete(url, httpOptions);
   }
   //dodaj novo vozilo
   createVehicle(veh:Vehicle):Observable<any> {
     const url:string = this.vehicleUrl;
-    console.log(veh);
     return this.http.post<Vehicle>(url, veh, httpOptions);
-  }
-  //vrati sledeci id za generisanje
-  getNextGeneratorId():Observable<any>{
-    console.log("GetNextGeneratorID funkcija");
-    const url:string = this.idGeneratorUrl+ '/' + 0;
-    return this.http.get<IdGenerator>(url,httpOptions);
-  }
-  //povecaj id za generisanje
-  incrementGeneratorId(id:IdGenerator):Observable<any>{
-    const url:string = this.idGeneratorUrl + '/' + '0';
-    console.log("incrementGeneratorId", id, url);
-    return this.http.put(url, id, httpOptions);
   }
   //user login
   login(username:string, password:string):Observable<any>
@@ -106,19 +92,13 @@ export class CarServiceService {
   {
     const url:string = this.userUrl;
     var user = new User();
-    var gen = new IdGenerator();
-    this.getNextGeneratorId().subscribe(res => {
-      gen = res;
-      user.id=gen.userId;
-      gen.userId = +gen.userId + 1;
-      user.password = password;
-      user.username = username;
-      user.role = "user";
-      this.incrementGeneratorId(gen).subscribe(res => console.log(res));
-      this.http.post<User>(url, user, httpOptions).subscribe(res => 
-      {
-        console.log(res);
-      });
+    user.id = uuid();
+    user.password = password;
+    user.username = username;
+    user.role = "user";
+    this.http.post<User>(url, user, httpOptions).subscribe(res => 
+    {
+      console.log(res);
     });
   }
 }

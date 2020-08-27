@@ -8,13 +8,13 @@
             <!-- <label>Id vozila:</label>
             <input type="number" name="vehicleId" [(ngModel)]> -->
             <label>Proizvodjac(marka):</label>
-            <input type="text" name="vehicleManufacturer" [(ngModel)]="vehicle.manufacturer">
+            <input type="text" name="vehicleManufacturer" [(ngModel)]="vehicle.manufacturer" name="manufacturer">
             <label>tip vozila:</label>
-            <input type="text" name="vehicleType" [(ngModel)]="vehicle.type">
+            <input type="text" name="vehicleType" [(ngModel)]="vehicle.type" name="type">
             <label>Registarska oznaka:</label>
-            <input type="text" name="vehiclePlateNumber" [(ngModel)]="vehicle.plateNumber">
+            <input type="text" name="vehiclePlateNumber" [(ngModel)]="vehicle.plateNumber" name="plateNumber">
             <label>Opis problema:</label>
-            <input type="text" name="vehicleDescription" [(ngModel)]="vehicle.description">
+            <input type="text" name="vehicleDescription" [(ngModel)]="vehicle.description" name="description">
             <label>Status:</label>
             <label [(ngModel)]="vehicle.status"></label>
             <button (click)="SaveEdit()">Save</button>

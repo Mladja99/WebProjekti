@@ -13,7 +13,11 @@ import { CreateVehicleComponent } from './components/create-vehicle/create-vehic
 import { RespondComponent } from './components/respond/respond.component';
 import { AuthModule } from './auth/auth.module';
 import { HeaderComponent } from './components/header/header.component';
-import { CookieService } from 'ngx-cookie-service'
+import { CookieService } from 'ngx-cookie-service';
+import { StoreModule } from '@ngrx/store'
+import { VehicleReducer } from './reducers/vehicle.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { VehicleEffects } from './effects/vehicle.effects';
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,7 +35,9 @@ import { CookieService } from 'ngx-cookie-service'
     HttpClientModule,
     FormsModule,
     NgbModule,
-    AuthModule
+    AuthModule,
+    StoreModule.forRoot({vehicle: VehicleReducer}),
+    EffectsModule.forRoot([VehicleEffects])
   ],
   providers: [
     CookieService

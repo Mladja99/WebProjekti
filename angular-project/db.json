@@ -5,7 +5,7 @@
       "username": "mladja",
       "password": "123123",
       "role": "admin"
-    } ,
+    },
     {
       "id": 7,
       "password": "123123",
@@ -23,13 +23,6 @@
       "password": "123123",
       "username": "pera",
       "role": "user"
-    }
-  ],
-  "idGenerator": [
-    {
-      "id": 0,
-      "vehicleId": 11,
-      "userId": 10
     }
   ],
   "vehicles": [
@@ -100,7 +93,7 @@
       "manufacturer": "BMW",
       "type": "320i E92",
       "plateNumber": "NI248VU",
-      "description": "bcbcbcbcb",
+      "description": "asdasd",
       "id": 10,
       "status": "Waiting for user to respond",
       "statusType": 2

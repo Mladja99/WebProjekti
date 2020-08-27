@@ -15,7 +15,7 @@ export class VehicleItemComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onEdit(id:number){
+  onEdit(id:string){
     // vehicle.description = 'Edited';
     // this.carService.editVehicle(vehicle).subscribe(veh => console.log(veh));
     this._router.navigate([`${"edit"}/${id}`]);
@@ -26,7 +26,7 @@ export class VehicleItemComponent implements OnInit {
     this.carService.deleteVehicle(veh).subscribe(x => console.log(x));
   }
 
-  onRespond(id){
+  onRespond(id:string){
     this._router.navigate([`${"respond"}/${id}`]);
   }
 }

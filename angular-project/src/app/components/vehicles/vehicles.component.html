@@ -2,7 +2,20 @@
 <head>
 </head>
 <body>
-    <app-vehicle-item *ngFor="let vehicle of vehicles" [vehicle] = "vehicle" (deleteVehicle) = "deleteVehicle($event)">
+    <!-- <app-vehicle-item *ngFor="let vehicle of vehicles" [vehicle] = "vehicle" (deleteVehicle) = "deleteVehicle($event)">
 
-    </app-vehicle-item>
+    </app-vehicle-item> -->
+
+    <ul>
+        <li *ngFor="let vehicle of vehicles | async">
+            {{ vehicle.id }}
+            {{ vehicle.manufacturer }}
+            {{ vehicle.type }}
+            {{ vehicle.description }}
+            {{ vehicle.status }}
+            <button (click)="onEdit(vehicle.id)">Edit</button>
+            <button (click)="onDelete(vehicle.id)">Delete</button>
+            <button name="respondButton" (click)="onRespond(vehicle.id)">Respond</button>
+        </li>
+    </ul>
 </body>

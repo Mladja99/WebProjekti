@@ -1,24 +1,45 @@
 import { Component, OnInit } from '@angular/core';
 import { Vehicle } from '../../models/Vehicle';
 import { CarServiceService } from '../../services/car-service.service'
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { AppState } from '../../models/app-state.model';
+import { Store } from '@ngrx/store';
+import { AddVehicleAction, DeleteVehicleAction, GetVehiclesAction } from '../../actions/vehicles.actions';
 @Component({
   selector: 'app-vehicles',
   templateUrl: './vehicles.component.html',
   styleUrls: ['./vehicles.component.css']
 })
 export class VehiclesComponent implements OnInit {
-  vehicles: Vehicle[];
-  constructor(private carServiceService : CarServiceService, private route: ActivatedRoute) { }
 
-  ngOnInit(): void {
-    this.carServiceService.getVehicles().subscribe(vehicles => {
-      this.vehicles = vehicles;
-    });
+  vehicles: Observable<Array<Vehicle>>;
+  loading$: Observable<boolean>;
+  errors$: Observable<Error>;
+
+  constructor(private carServiceService : CarServiceService,
+    private route: ActivatedRoute, 
+    private store:Store<AppState>,
+    private _router:Router) { }
+
+  ngOnInit():void {
+    this.vehicles = this.store.select(store => store.vehicle.list);
+    this.loading$ = this.store.select(store => store.vehicle.loading);
+    this.errors$ = this.store.select(store => store.vehicle.error);
+    this.store.dispatch(new GetVehiclesAction());
   }
 
-  deleteVehicle(vehicle:Vehicle)
+  onEdit(id:string){
+    this._router.navigate([`${"edit"}/${id}`]);
+  }
+  
+  onDelete(id: string)
   {
-    this.vehicles = this.vehicles.filter(x=> x.id !== vehicle.id);
+    //this.carServiceService.deleteVehicle(id).subscribe();
+    this.store.dispatch(new DeleteVehicleAction(id));
+  }
+
+  onRespond(id:string){
+    this._router.navigate([`${"respond"}/${id}`]);
   }
 }

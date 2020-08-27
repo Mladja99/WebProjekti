@@ -15,7 +15,7 @@ export class RespondComponent implements OnInit {
   oldDesc:string = null;
   ngOnInit(): void {
     this.route.paramMap.subscribe(params =>{
-      const vehicleId = +params.get('id');
+      const vehicleId = params.get('id');
       if(vehicleId)
       {
         this.getSingleVehicle(vehicleId);
@@ -23,7 +23,7 @@ export class RespondComponent implements OnInit {
     });
   }
 
-  getSingleVehicle(id: number): void{
+  getSingleVehicle(id: string): void{
     this.carService.getSingleVehicle(id).subscribe((vehicle:Vehicle) => { 
       this.vehicle = vehicle;
       this.oldDesc = vehicle.description;
