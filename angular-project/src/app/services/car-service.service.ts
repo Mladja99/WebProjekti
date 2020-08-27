@@ -18,7 +18,7 @@ export class CarServiceService {
 
   vehicleUrl:string = 'http://localhost:3000/vehicles';
   userUrl:string = 'http://localhost:3000/users';
-  currentUser:User = null;
+  currentUser: User = null;
 
   constructor(private http:HttpClient, private cookie:CookieService) { }
   //vrati vozila iz baze
@@ -58,18 +58,10 @@ export class CarServiceService {
   {
     if(this.cookie.check("username") && this.cookie.check("userId") && this.cookie.check("role"))
     {
-      // if(this.currentUser == null)
-      // {
-      //   this.currentUser = new User();
-      //   this.currentUser.id = +this.cookie.get("userId");
-      //   this.currentUser.username = this.cookie.get("username");
-      //   this.currentUser.role = this.cookie.get("role");
-      // }
       return true;
     } 
     else 
     {
-      if(this.currentUser!=null) this.currentUser = null;
       return false
     }
   }
@@ -88,7 +80,7 @@ export class CarServiceService {
     return this.http.get(url,httpOptions);
   }
   //registracija usera
-  register(username:string, password:string)
+  register(username:string, password:string):Observable<User>
   {
     const url:string = this.userUrl;
     var user = new User();
@@ -96,9 +88,25 @@ export class CarServiceService {
     user.password = password;
     user.username = username;
     user.role = "user";
-    this.http.post<User>(url, user, httpOptions).subscribe(res => 
+    return this.http.post<User>(url, user, httpOptions);
+  }
+
+  //vrati usera po id-u
+  getCurrentUser():Observable<any>
+  {
+    if(this.cookie.check("userId"))
     {
-      console.log(res);
-    });
+      let id:string = this.cookie.get("userId");
+      const url: string = this.userUrl + "/" + id;
+      return this.http.get<User>(url,httpOptions);
+    }
+    throw new Error("No cookie");
+  }
+
+  //update usera
+  updateUser(user: User):Observable<any>
+  {
+    const url:string = this.userUrl+'/'+user.id;
+    return this.http.put(url, user, httpOptions);
   }
 }

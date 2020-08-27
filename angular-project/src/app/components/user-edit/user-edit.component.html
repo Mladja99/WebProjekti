@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<head>
+    
+</head>
+<body>
+    <form class= "form" #f="ngForm" (ngSubmit)="onSubmit(f)">
+        <div>
+            <label>User id: {{user.id}}</label>
+            <label>Username: </label>
+            <input type="text" name="usersUsername" [(ngModel)]="user.username">
+            <label>Role: {{user.role}}</label>
+            <button type="submit" [disabled]="f.pristine">Save</button>
+            <p class="text-danger">{{errorMessage}}</p>
+        </div>
+    </form>
+</body>

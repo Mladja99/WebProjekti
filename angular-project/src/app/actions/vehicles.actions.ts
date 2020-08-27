@@ -1,6 +1,6 @@
-import { Action } from '@ngrx/store';
+import { Action, createAction, props } from '@ngrx/store';
 import { Vehicle } from '../models/Vehicle'
-import { CarServiceService } from '../services/car-service.service';
+import { Update } from '@ngrx/entity';
 
 export enum VehicleAcionTypes{
     GET_VEHICLES = '[VEHICLES] Get Items',
@@ -67,7 +67,7 @@ export class DeleteVehicleActionFailure implements Action{
 }
 
 export type VehicleAction = 
-    | GetVehiclesAction 
+    GetVehiclesAction 
     | GetVehiclesActionSuccess
     | GetVehiclesActionFailure
     | AddVehicleAction 

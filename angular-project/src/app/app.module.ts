@@ -14,10 +14,15 @@ import { RespondComponent } from './components/respond/respond.component';
 import { AuthModule } from './auth/auth.module';
 import { HeaderComponent } from './components/header/header.component';
 import { CookieService } from 'ngx-cookie-service';
-import { StoreModule } from '@ngrx/store'
+import { StoreModule, Store } from '@ngrx/store'
 import { VehicleReducer } from './reducers/vehicle.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { VehicleEffects } from './effects/vehicle.effects';
+import { UserReducer } from './reducers/user.reducer';
+import { UserEffects } from './effects/user.effects';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
+import { UserEditComponent } from './components/user-edit/user-edit.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,7 +32,8 @@ import { VehicleEffects } from './effects/vehicle.effects';
     HomeComponent,
     CreateVehicleComponent,
     RespondComponent,
-    HeaderComponent
+    HeaderComponent,
+    UserEditComponent
   ],
   imports: [
     BrowserModule,
@@ -36,8 +42,15 @@ import { VehicleEffects } from './effects/vehicle.effects';
     FormsModule,
     NgbModule,
     AuthModule,
+    // StoreModule.forFeature("vehiclesFeature",{vehicle: VehicleReducer}),
+    // StoreModule.forRoot({user: UserReducer}),
+    // EffectsModule.forFeature([VehicleEffects]),
+    // EffectsModule.forRoot([UserEffects]),
     StoreModule.forRoot({vehicle: VehicleReducer}),
-    EffectsModule.forRoot([VehicleEffects])
+    StoreModule.forFeature("user",{user: UserReducer}),
+    EffectsModule.forRoot([VehicleEffects]),
+    EffectsModule.forFeature([UserEffects]),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production })
   ],
   providers: [
     CookieService

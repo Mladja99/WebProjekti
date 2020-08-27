@@ -23,7 +23,8 @@
             <li class="navbar-nav ml-auto headerNav"
                 *ngIf="carService.loggedIn();"
                 dropdown>
-                <a class="nav-link">
+                <a class="nav-link" [routerLink]="['editUser']"
+                routerLinkActive="active">
                      Welcome {{carService.currentUser?.username}}
                 </a>
                 <!-- <a class="dropdown-item"

@@ -2,10 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { Vehicle } from '../../models/Vehicle';
 import { CarServiceService } from '../../services/car-service.service'
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable } from 'rxjs';
-import { AppState } from '../../models/app-state.model';
-import { Store } from '@ngrx/store';
+import { Observable, of } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { Store, createFeatureSelector, ActionReducerMap, createSelector } from '@ngrx/store';
 import { AddVehicleAction, DeleteVehicleAction, GetVehiclesAction } from '../../actions/vehicles.actions';
+import * as fromVehicle from '../../reducers/vehicle.reducer';
+import { AppState } from '../../models/app-state.model';
 @Component({
   selector: 'app-vehicles',
   templateUrl: './vehicles.component.html',
@@ -14,19 +16,32 @@ import { AddVehicleAction, DeleteVehicleAction, GetVehiclesAction } from '../../
 export class VehiclesComponent implements OnInit {
 
   vehicles: Observable<Array<Vehicle>>;
-  loading$: Observable<boolean>;
+  loading$: Observable<boolean> = null;
   errors$: Observable<Error>;
 
   constructor(private carServiceService : CarServiceService,
     private route: ActivatedRoute, 
-    private store:Store<AppState>,
-    private _router:Router) { }
+    private store: Store<AppState>,
+    private _router:Router,
+    ) { }
 
-  ngOnInit():void {
-    this.vehicles = this.store.select(store => store.vehicle.list);
+  async ngOnInit() {
+    // this.store.dispatch(new GetVehiclesAction());
+    await this.loadData();
+    console.log("data loaded");
     this.loading$ = this.store.select(store => store.vehicle.loading);
     this.errors$ = this.store.select(store => store.vehicle.error);
+    await this.populateVehicle();
+  }
+
+  async loadData() {
     this.store.dispatch(new GetVehiclesAction());
+    console.log("loading data");
+  }
+
+  async populateVehicle()
+  {
+    this.vehicles = this.store.select(fromVehicle.selectAll);
   }
 
   onEdit(id:string){

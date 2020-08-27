@@ -6,13 +6,15 @@ import { HomeComponent } from './components/home/home.component';
 import { CreateVehicleComponent } from './components/create-vehicle/create-vehicle.component';
 import { RespondComponent } from './components/respond/respond.component';
 import { HeaderComponent } from './components/header/header.component';
+import { UserEditComponent } from './components/user-edit/user-edit.component'
 const routes: Routes = [
   { path: '', component: HomeComponent},
   { path: 'edit/:id', component: EditVehicleComponent},
   { path: 'respond/:id', component: RespondComponent},
   { path: 'create', component: CreateVehicleComponent},
   { path: 'vehicles', component: VehiclesComponent},
-  { path: 'header', component: HeaderComponent}
+  { path: 'header', component: HeaderComponent},
+  { path: 'editUser', component: UserEditComponent}
 ];
 
 @NgModule({
