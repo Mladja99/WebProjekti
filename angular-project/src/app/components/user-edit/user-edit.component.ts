@@ -14,10 +14,19 @@ export class UserEditComponent implements OnInit {
   user:User;
   errorMessage:string
   
-  constructor(private router:Router, private carService: CarServiceService) { }
+  constructor(
+    private router:Router, 
+    private carService: CarServiceService
+  ) { }
 
   ngOnInit(): void {
-    this.carService.getCurrentUser().subscribe(res => this.user = res);
+    this.carService.getCurrentUser().subscribe(res => 
+    {
+      if(res)
+        this.user = res;
+      else
+        this.router.navigate(['']);
+    });
   }
 
   onSubmit(f:NgForm)

@@ -69,3 +69,10 @@ export const selectAll = createSelector(
         return Object.keys(entities).map(id => entities[id]);
     }  
 )
+
+export const selectByIserId = (userId:string) => createSelector(
+    selectAllEntites,
+    (entities) =>{
+        return Object.keys(entities).filter(id => entities[id].userId == userId).map(id => entities[id]);
+    }
+)

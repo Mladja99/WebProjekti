@@ -2,10 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Vehicle } from '../../models/Vehicle';
 import { CarServiceService } from '../../services/car-service.service'
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable, of } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { Store, createFeatureSelector, ActionReducerMap, createSelector } from '@ngrx/store';
-import { AddVehicleAction, DeleteVehicleAction, GetVehiclesAction } from '../../actions/vehicles.actions';
+import { Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { DeleteVehicleAction, GetVehiclesAction } from '../../actions/vehicles.actions';
 import * as fromVehicle from '../../reducers/vehicle.reducer';
 import { AppState } from '../../models/app-state.model';
 @Component({
@@ -18,15 +17,18 @@ export class VehiclesComponent implements OnInit {
   vehicles: Observable<Array<Vehicle>>;
   loading$: Observable<boolean> = null;
   errors$: Observable<Error>;
-
-  constructor(private carServiceService : CarServiceService,
-    private route: ActivatedRoute, 
+  errorMessage: string = "";
+  constructor(
+    private carServiceService : CarServiceService,
     private store: Store<AppState>,
     private _router:Router,
     ) { }
 
   async ngOnInit() {
-    // this.store.dispatch(new GetVehiclesAction());
+    if(!this.carServiceService.loggedIn())
+    {
+      this._router.navigate(['']);
+    }
     await this.loadData();
     console.log("data loaded");
     this.loading$ = this.store.select(store => store.vehicle.loading);
@@ -41,7 +43,15 @@ export class VehiclesComponent implements OnInit {
 
   async populateVehicle()
   {
-    this.vehicles = this.store.select(fromVehicle.selectAll);
+    if(this.carServiceService.getCurrentUserRole() == "admin")
+    {
+      this.vehicles = this.store.select(fromVehicle.selectAll);
+    }
+    else
+    {
+      let id = this.carServiceService.getCurrentUserId();
+      this.vehicles = this.store.select(fromVehicle.selectByIserId(id));
+    }
   }
 
   onEdit(id:string){
@@ -50,11 +60,30 @@ export class VehiclesComponent implements OnInit {
   
   onDelete(id: string)
   {
-    //this.carServiceService.deleteVehicle(id).subscribe();
     this.store.dispatch(new DeleteVehicleAction(id));
   }
 
-  onRespond(id:string){
-    this._router.navigate([`${"respond"}/${id}`]);
+  respond(vehicle:Vehicle){
+    if(vehicle.statusType %2 == 0 && this.carServiceService.getCurrentUserRole() === 'user')
+    {
+      console.log(vehicle.statusType %2);
+      console.log(this.carServiceService.getCurrentUserRole());
+      console.log(vehicle.statusType %2 == 0 && this.carServiceService.getCurrentUserRole() === 'user');
+      vehicle.statusType = +vehicle.statusType + 1;
+      vehicle.status = "Waiting for mechanic to respond";
+      this.carServiceService.editVehicle(vehicle).subscribe(veh => console.log(veh));
+      window.location.reload(false);
+    }
+    else if(vehicle.statusType %2 == 1 && this.carServiceService.getCurrentUserRole() === 'admin')
+    {
+      console.log(vehicle.statusType %2);
+      console.log(this.carServiceService.getCurrentUserRole());
+      console.log(vehicle.statusType %2 == 1 && this.carServiceService.getCurrentUserRole() === 'admin');
+      vehicle.statusType = +vehicle.statusType + 1;
+      vehicle.status = "Waiting for user to respond";
+      this.carServiceService.editVehicle(vehicle).subscribe(veh => console.log(veh));
+      window.location.reload(false);
+    }
+    else this.errorMessage = "You cant respond to chossen vehicle, you have to wait for respond";
   }
 }

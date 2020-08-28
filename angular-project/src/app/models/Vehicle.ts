@@ -7,4 +7,5 @@ export class Vehicle
     description: string;
     status: string;
     statusType: number;
+    userId: string;
 }

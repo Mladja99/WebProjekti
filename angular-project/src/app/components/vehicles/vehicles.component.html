@@ -15,7 +15,9 @@
             {{ vehicle.status }}
             <button (click)="onEdit(vehicle.id)">Edit</button>
             <button (click)="onDelete(vehicle.id)">Delete</button>
-            <button name="respondButton" (click)="onRespond(vehicle.id)">Respond</button>
+            <app-respond [vehicle]="vehicle" (respond)="respond($event)"></app-respond>
+            <!-- <button name="respondButton">Respond</button> -->
         </li>
+        <label class="text-danger" >{{errorMessage}}</label>
     </ul>
 </body>

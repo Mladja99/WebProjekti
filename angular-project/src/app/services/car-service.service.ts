@@ -109,4 +109,16 @@ export class CarServiceService {
     const url:string = this.userUrl+'/'+user.id;
     return this.http.put(url, user, httpOptions);
   }
+
+  //vrati id trenutno logovanog usera
+  getCurrentUserId():string
+  {
+    return this.cookie.get("userId");
+  }
+
+  //vrati rolu trenutno logovanog usera
+  getCurrentUserRole():string
+  {
+    return this.cookie.get("role");
+  }
 }

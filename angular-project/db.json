@@ -2,7 +2,7 @@
   "users": [
     {
       "id": 1,
-      "username": "mladjaaa",
+      "username": "mladja",
       "password": "123123",
       "role": "admin"
     },
@@ -29,11 +29,12 @@
     {
       "id": 1,
       "manufacturer": "BMW",
-      "type": "320i E90",
       "plateNumber": "NI248VU",
-      "description": "",
-      "status": "Waiting for user to check data",
-      "statusType": 0
+      "status": "Waiting for mechanic to respond",
+      "statusType": 3,
+      "description": "asdasdasda",
+      "type": "320i E90",
+      "userId": "7"
     },
     {
       "id": 2,
@@ -42,7 +43,8 @@
       "plateNumber": "123123",
       "description": "",
       "status": "Waiting for user to check data",
-      "statusType": 0
+      "statusType": 0,
+      "userId": "8"
     },
     {
       "id": 3,
@@ -51,16 +53,8 @@
       "plateNumber": "123123",
       "description": "",
       "status": "Waiting for user to check data",
-      "statusType": 0
-    },
-    {
-      "id": 4,
-      "manufacturer": "BMW",
-      "type": "325i E36",
-      "plateNumber": "123123",
-      "description": "",
-      "status": "Waiting for user to check data",
-      "statusType": 0
+      "statusType": 0,
+      "userId": "9"
     },
     {
       "id": 5,
@@ -69,7 +63,8 @@
       "plateNumber": "123123",
       "description": "",
       "status": "Waiting for user to check data",
-      "statusType": 0
+      "statusType": 0,
+      "userId": "8"
     },
     {
       "id": 7,
@@ -78,7 +73,8 @@
       "plateNumber": "123123",
       "description": "",
       "status": "Waiting for user to check data",
-      "statusType": 0
+      "statusType": 0,
+      "userId": "9"
     },
     {
       "manufacturer": "BMW",
@@ -87,16 +83,8 @@
       "plateNumber": "NI248VU",
       "id": 8,
       "status": "Waiting for user to check data",
-      "statusType": 0
-    },
-    {
-      "manufacturer": "BMW ",
-      "type": "320i E92",
-      "description": "asdasdasdasd",
-      "plateNumber": "123123",
-      "id": "d0389ae9-b0d5-4ea6-bef6-cb05c9a529a6",
-      "status": "Waiting for user to check data",
-      "statusType": 0
+      "statusType": 0,
+      "userId": "1"
     }
   ]
 }

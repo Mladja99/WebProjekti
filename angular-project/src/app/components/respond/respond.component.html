@@ -1,15 +1,26 @@
+<!-- <div>
+    <form class= "form" #f="ngForm" (ngSubmit)="onSubmit(f)">
+        <label [(ngModel)] ="errorMessage"></label>
+        <br>
+        <label>Proizvodjac(marka):</label>
+        {{vehicle.manufacturer}}
+        <label>tip vozila:</label>
+        {{vehicle.type}}
+        <label>Registarska oznaka:</label>
+        {{vehicle.plateNumber}}
+        <label>Opis problema:</label>
+        <input type="text" name="vehicleDescription" [(ngModel)]="vehicle.description">
+        <label>Status:</label>
+        {{vehicle.status}}
+        <button type="submit" [disabled]="f.pristine">Respond</button>
+    </form>
+</div> -->
+
 <div>
-    <label [(ngModel)] ="errorMessage"></label>
-    <br>
-    <label>Proizvodjac(marka):</label>
-    {{vehicle.manufacturer}}
-    <label>tip vozila:</label>
-    {{vehicle.type}}
-    <label>Registarska oznaka:</label>
-    {{vehicle.plateNumber}}
-    <label>Opis problema:</label>
-    <input type="text" name="vehicleDescription" [(ngModel)]="vehicle.description">
-    <label>Status:</label>
-    {{vehicle.status}}
-    <button (click)="respond()">Respond</button>
+    <form class= "form" #f="ngForm" (ngSubmit)="onSubmit(f)">
+        <!-- <label [(ngModel)] ="errorMessage" ></label> -->
+        <label>New description(for respond):</label>
+        <input type="text" [(ngModel)]="localVehicle.description" name="vehicleDescription">
+        <button type="submit" [disabled]="f.pristine" name="submitButton">Respond</button>
+    </form>
 </div>

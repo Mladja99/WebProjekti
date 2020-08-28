@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { CarServiceService } from '../../services/car-service.service';
 import { Vehicle } from '../../models/Vehicle';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../models/app-state.model';
 import { AddVehicleAction } from '../../actions/vehicles.actions';
 import { v4 as uuid } from 'uuid';
+import { CarServiceService } from '../../services/car-service.service';
 
 @Component({
   selector: 'app-create-vehicle',
@@ -14,9 +14,15 @@ import { v4 as uuid } from 'uuid';
 })
 export class CreateVehicleComponent implements OnInit {
 
-  constructor(private carService:CarServiceService, private route: ActivatedRoute, private _router:Router, private store:Store<AppState>) { }
+  constructor(
+    private carService: CarServiceService,
+    private _router:Router, 
+    private store:Store<AppState>
+  ) { }
   vehicle:Vehicle = null;
   ngOnInit(): void {
+    if(!this.carService.loggedIn())
+      this._router.navigate(['']);
     this.vehicle = new Vehicle();
   }
 
@@ -26,8 +32,9 @@ export class CreateVehicleComponent implements OnInit {
     {
       
       this.vehicle.id = uuid();
-      this.vehicle.status = "Waiting for user to check data";
+      this.vehicle.status = "Waiting for mechanic to respond";
       this.vehicle.statusType = 0;
+      this.vehicle.userId = this.carService.getCurrentUserId();
       this.store.dispatch(new AddVehicleAction(this.vehicle));
       this._router.navigate([`${"vehicles"}`]);
     }
