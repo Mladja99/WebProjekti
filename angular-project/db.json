@@ -23,6 +23,18 @@
       "password": "123123",
       "username": "pera",
       "role": "user"
+    },
+    {
+      "id": "9585805d-27b6-45c1-a2f8-ee1ecec3664f",
+      "password": "123123",
+      "username": "pera1235",
+      "role": "user"
+    },
+    {
+      "id": "553d1689-0040-4d21-a5d9-b498ec8f0fef",
+      "password": "123123",
+      "username": "pera1234",
+      "role": "user"
     }
   ],
   "vehicles": [
@@ -30,9 +42,9 @@
       "id": 1,
       "manufacturer": "BMW",
       "plateNumber": "NI248VU",
-      "status": "Waiting for mechanic to respond",
-      "statusType": 3,
-      "description": "asdasdasda",
+      "status": "Waiting for user to respond",
+      "statusType": 4,
+      "description": "12312312",
       "type": "320i E90",
       "userId": "7"
     },
@@ -85,6 +97,36 @@
       "status": "Waiting for user to check data",
       "statusType": 0,
       "userId": "1"
+    },
+    {
+      "manufacturer": "BMW",
+      "type": "320i E92",
+      "plateNumber": "123123",
+      "description": "asdasdasd",
+      "id": "9e4b99ce-6378-457d-ba70-617a9fbe230e",
+      "status": "Waiting for mechanic to respond",
+      "statusType": 0,
+      "userId": "1"
+    },
+    {
+      "id": "f8911459-c196-4a32-b54c-6436bf90ab8e",
+      "manufacturer": "BMW",
+      "plateNumber": "123123",
+      "status": "Waiting for mechanic to respond",
+      "statusType": 1,
+      "description": "asdasdas",
+      "type": "320i E90",
+      "userId": "9585805d-27b6-45c1-a2f8-ee1ecec3664f"
+    },
+    {
+      "manufacturer": "BMW ",
+      "type": "320i E92",
+      "plateNumber": "123123",
+      "description": "asdasdasd",
+      "id": "799139dc-e693-49fd-b6d5-903c4f8716bf",
+      "status": "Waiting for mechanic to respond",
+      "statusType": 1,
+      "userId": "9585805d-27b6-45c1-a2f8-ee1ecec3664f"
     }
   ]
 }

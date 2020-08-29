@@ -19,11 +19,13 @@ export class UserEditComponent implements OnInit {
     private carService: CarServiceService
   ) { }
 
-  ngOnInit(): void {
+  ngOnInit(){
     this.carService.getCurrentUser().subscribe(res => 
     {
       if(res)
+      {
         this.user = res;
+      }
       else
         this.router.navigate(['']);
     });

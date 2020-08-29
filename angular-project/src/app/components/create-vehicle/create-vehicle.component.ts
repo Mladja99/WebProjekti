@@ -33,7 +33,7 @@ export class CreateVehicleComponent implements OnInit {
       
       this.vehicle.id = uuid();
       this.vehicle.status = "Waiting for mechanic to respond";
-      this.vehicle.statusType = 0;
+      this.vehicle.statusType = 1;
       this.vehicle.userId = this.carService.getCurrentUserId();
       this.store.dispatch(new AddVehicleAction(this.vehicle));
       this._router.navigate([`${"vehicles"}`]);

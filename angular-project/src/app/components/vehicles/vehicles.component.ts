@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Vehicle } from '../../models/Vehicle';
 import { CarServiceService } from '../../services/car-service.service'
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { DeleteVehicleAction, GetVehiclesAction } from '../../actions/vehicles.actions';
@@ -30,7 +30,6 @@ export class VehiclesComponent implements OnInit {
       this._router.navigate(['']);
     }
     await this.loadData();
-    console.log("data loaded");
     this.loading$ = this.store.select(store => store.vehicle.loading);
     this.errors$ = this.store.select(store => store.vehicle.error);
     await this.populateVehicle();
@@ -38,7 +37,6 @@ export class VehiclesComponent implements OnInit {
 
   async loadData() {
     this.store.dispatch(new GetVehiclesAction());
-    console.log("loading data");
   }
 
   async populateVehicle()
@@ -55,20 +53,38 @@ export class VehiclesComponent implements OnInit {
   }
 
   onEdit(id:string){
-    this._router.navigate([`${"edit"}/${id}`]);
+    this.carServiceService.getSingleVehicle(id).subscribe(res=>{
+      if(res.statusType %2 == 0 && this.carServiceService.getCurrentUserRole() === 'user')
+      {
+        this._router.navigate([`${"edit"}/${id}`]);
+      }
+      else if(res.statusType %2 == 1 && this.carServiceService.getCurrentUserRole() === 'admin')
+      {
+        this._router.navigate([`${"edit"}/${id}`]);
+      }
+      else this.errorMessage = "You cant edit chossen vehicle, you have to wait for respond";
+    });
   }
   
   onDelete(id: string)
   {
-    this.store.dispatch(new DeleteVehicleAction(id));
+    this.carServiceService.getSingleVehicle(id).subscribe(res=>{
+      if(res.statusType %2 == 0 && this.carServiceService.getCurrentUserRole() === 'user')
+      {
+        this.store.dispatch(new DeleteVehicleAction(id));
+      }
+      else if(res.statusType %2 == 1 && this.carServiceService.getCurrentUserRole() === 'admin')
+      {
+        this.store.dispatch(new DeleteVehicleAction(id));
+      }
+      else this.errorMessage = "You cant delete chossen vehicle, you have to wait for respond";
+    });
+    
   }
 
   respond(vehicle:Vehicle){
     if(vehicle.statusType %2 == 0 && this.carServiceService.getCurrentUserRole() === 'user')
     {
-      console.log(vehicle.statusType %2);
-      console.log(this.carServiceService.getCurrentUserRole());
-      console.log(vehicle.statusType %2 == 0 && this.carServiceService.getCurrentUserRole() === 'user');
       vehicle.statusType = +vehicle.statusType + 1;
       vehicle.status = "Waiting for mechanic to respond";
       this.carServiceService.editVehicle(vehicle).subscribe(veh => console.log(veh));
@@ -76,9 +92,6 @@ export class VehiclesComponent implements OnInit {
     }
     else if(vehicle.statusType %2 == 1 && this.carServiceService.getCurrentUserRole() === 'admin')
     {
-      console.log(vehicle.statusType %2);
-      console.log(this.carServiceService.getCurrentUserRole());
-      console.log(vehicle.statusType %2 == 1 && this.carServiceService.getCurrentUserRole() === 'admin');
       vehicle.statusType = +vehicle.statusType + 1;
       vehicle.status = "Waiting for user to respond";
       this.carServiceService.editVehicle(vehicle).subscribe(veh => console.log(veh));

@@ -5,7 +5,6 @@ import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { VehicleItemComponent } from './components/vehicle-item/vehicle-item.component';
 import { VehiclesComponent } from './components/vehicles/vehicles.component';
 import { EditVehicleComponent } from './components/edit-vehicle/edit-vehicle.component';
 import { HomeComponent } from './components/home/home.component';
@@ -14,7 +13,7 @@ import { RespondComponent } from './components/respond/respond.component';
 import { AuthModule } from './auth/auth.module';
 import { HeaderComponent } from './components/header/header.component';
 import { CookieService } from 'ngx-cookie-service';
-import { StoreModule, Store } from '@ngrx/store'
+import { StoreModule } from '@ngrx/store'
 import { VehicleReducer } from './reducers/vehicle.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { VehicleEffects } from './effects/vehicle.effects';
@@ -26,7 +25,6 @@ import { UserEditComponent } from './components/user-edit/user-edit.component';
 @NgModule({
   declarations: [
     AppComponent,
-    VehicleItemComponent,
     VehiclesComponent,
     EditVehicleComponent,
     HomeComponent,
@@ -42,10 +40,6 @@ import { UserEditComponent } from './components/user-edit/user-edit.component';
     FormsModule,
     NgbModule,
     AuthModule,
-    // StoreModule.forFeature("vehiclesFeature",{vehicle: VehicleReducer}),
-    // StoreModule.forRoot({user: UserReducer}),
-    // EffectsModule.forFeature([VehicleEffects]),
-    // EffectsModule.forRoot([UserEffects]),
     StoreModule.forRoot({vehicle: VehicleReducer}),
     StoreModule.forFeature("user",{user: UserReducer}),
     EffectsModule.forRoot([VehicleEffects]),

@@ -1,23 +1,51 @@
 <!DOCTYPE html>
-<head>
-    
-</head>
-<body>
-    <form class="form">
-        <div>
-            <!-- <label>Id vozila:</label>
-            <input type="number" name="vehicleId" [(ngModel)]> -->
-            <label>Proizvodjac(marka):</label>
-            <input type="text" name="vehicleManufacturer" [(ngModel)]="vehicle.manufacturer" name="manufacturer">
-            <label>tip vozila:</label>
-            <input type="text" name="vehicleType" [(ngModel)]="vehicle.type" name="type">
-            <label>Registarska oznaka:</label>
-            <input type="text" name="vehiclePlateNumber" [(ngModel)]="vehicle.plateNumber" name="plateNumber">
-            <label>Opis problema:</label>
-            <input type="text" name="vehicleDescription" [(ngModel)]="vehicle.description" name="description">
-            <label>Status:</label>
-            <label [(ngModel)]="vehicle.status"></label>
-            <button (click)="SaveEdit()">Save</button>
-        </div>
-    </form>
-</body>
+<html>
+        <head>
+                <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+                <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+                <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        </head>
+        <body>
+                <div class="col-md-9 offset-md-3 mt-4">
+                        <div class="col-md-9">
+                                <div class="form-group">
+                                        <label class="control-label col-sm-2">Manufacturer:</label>
+                                        <div class="col-sm-10">          
+                                                <input type="text" class="form-control" placeholder="Enter manufacturer" name="vehicleManufacturer" [(ngModel)]="vehicle.manufacturer">
+                                        </div>
+                                </div>                        
+                        </div>
+                        <div class="col-md-9">
+                                <div class="form-group">
+                                        <label class="control-label col-sm-4">Vehicle type:</label>
+                                        <div class="col-sm-10">          
+                                                <input type="text" class="form-control" placeholder="Enter vehicle type" name="vehicleType" [(ngModel)]="vehicle.type">
+                                        </div>
+                                </div>                        
+                        </div>
+                        <div class="col-md-9">
+                                <div class="form-group">
+                                        <label class="control-label col-sm-4">Plate number:</label>
+                                        <div class="col-sm-10">          
+                                                <input type="text" class="form-control" placeholder="Enter plate number" name="vehiclePlateNumber" [(ngModel)]="vehicle.plateNumber">
+                                        </div>
+                                </div>                        
+                        </div>
+                        <div class="col-md-9">
+                                <div class="form-group">
+                                        <label class="control-label col-sm-4">Problem description:</label>
+                                        <div class="col-sm-10">
+                                        <textarea class="form-control" rows="7" name="vehicleDescription" [(ngModel)]="vehicle.description"></textarea>
+                                        </div>
+                                </div>
+                        </div>
+                        <div class="col-md-9">
+                                <div class="form-group">        
+                                        <div class="col-sm-offset-2 col-sm-10">
+                                        <button class="btn btn-primary" (click)="SaveEdit()">Save</button>
+                                        </div>
+                                </div>
+                        </div>
+                </div>
+        </body>
+</html>

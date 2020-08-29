@@ -12,8 +12,7 @@ import { CookieService } from 'ngx-cookie-service';
 export class RegisterComponent implements OnInit {
 
   constructor(private carService:CarServiceService,
-    private _router:Router,
-    private cookie: CookieService
+    private _router:Router
     ) { }
 
   errorMessage:string;
@@ -38,7 +37,8 @@ export class RegisterComponent implements OnInit {
       }
       else
       {
-        this.carService.register(f.value.username, f.value.password);
+        this.carService.register(f.value.username, f.value.password).subscribe(res=>console.log(res));
+        this._router.navigate(['login']);
       }
     });
   }

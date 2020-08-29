@@ -1,23 +1,26 @@
 <!DOCTYPE html>
 <head>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 <body>
-    <!-- <app-vehicle-item *ngFor="let vehicle of vehicles" [vehicle] = "vehicle" (deleteVehicle) = "deleteVehicle($event)">
-
-    </app-vehicle-item> -->
-
-    <ul>
-        <li *ngFor="let vehicle of vehicles | async">
-            {{ vehicle.id }}
-            {{ vehicle.manufacturer }}
-            {{ vehicle.type }}
-            {{ vehicle.description }}
-            {{ vehicle.status }}
-            <button (click)="onEdit(vehicle.id)">Edit</button>
-            <button (click)="onDelete(vehicle.id)">Delete</button>
-            <app-respond [vehicle]="vehicle" (respond)="respond($event)"></app-respond>
-            <!-- <button name="respondButton">Respond</button> -->
-        </li>
-        <label class="text-danger" >{{errorMessage}}</label>
-    </ul>
+    <div class="d-flex flex-wrap container">
+        <div class="d-flex flex-column col-xs-12 col-md-6 col-lg-4 mt-4 border border-dark" 
+            *ngFor="let vehicle of vehicles | async">
+            <h4 class="group inner list-group-item-heading">
+                {{ vehicle.manufacturer }} {{ vehicle.type }}</h4>
+            <p class="">{{ vehicle.status }}</p>
+            <div class="row">
+                <div class="col-xs-12 col-lg-12">
+                    <app-respond [vehicle]="vehicle" (respond)="respond($event)"></app-respond>
+                    <div class="d-flex justify-content-center mt-3 mb-3">
+                        <button class="btn btn-primary btn-sm col-lg-3" (click)="onEdit(vehicle.id)">Edit</button>
+                        <button class="btn btn-primary btn-sm col-lg-3 ml-auto" (click)="onDelete(vehicle.id)">Delete</button>
+                    </div>
+                </div>
+                <p class="text-danger">{{errorMessage}}</p>
+            </div>
+        </div>
+    </div>
 </body>

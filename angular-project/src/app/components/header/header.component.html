@@ -1,18 +1,23 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" [routerLink]="['']">AUTO SERVIS</a>
-    <a class="nav-link" [routerLink]="['vehicles']" routerLinkActive="active" *ngIf="carService.loggedIn();">Vehicles</a>
-    <a class="nav-link" [routerLink]="['create']" routerLinkActive="active" *ngIf="carService.loggedIn();">Create</a>
-    <button class="navbar-toggler"
-            type="button"
-            data-toggle="collapse"
-            data-target="#navbarNav"
-            aria-controls="navbarNav"
-            aria-expanded="false"
-            aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse"
-         id="navbarNav">
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+        <a class="navbar-brand" [routerLink]="['']">AUTO SERVIS</a>
+        <ul class="navbar-nav headerNav">
+            <li class="nav-item">
+                <a class="nav-link" [routerLink]="['vehicles']" routerLinkActive="active" *ngIf="carService.loggedIn();">Vehicles</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" [routerLink]="['create']" routerLinkActive="active" *ngIf="carService.loggedIn();">Create</a>
+            </li>
+        </ul>
         <ul class="navbar-nav ml-auto headerNav">
             <li class="nav-item" *ngIf="!carService.loggedIn();">
                 <a class="nav-link" [routerLink]="['register']" routerLinkActive="active">Register</a>
@@ -20,23 +25,17 @@
             <li class="nav-item" *ngIf="!carService.loggedIn();">
                 <a class="nav-link" [routerLink]="['login']" routerLinkActive="active">Login</a>
             </li>
-            <li class="navbar-nav ml-auto headerNav"
-                *ngIf="carService.loggedIn();"
-                dropdown>
+            <li class="nav-item" *ngIf="carService.loggedIn();">
                 <a class="nav-link" [routerLink]="['editUser']"
                 routerLinkActive="active">
-                     Welcome {{carService.currentUser?.username}}
+                    Welcome {{carService.currentUser?.username}}
                 </a>
-                <!-- <a class="dropdown-item"
-                    [routerLink]="['reset-password']"
-                    routerLinkActive="active"><i class="fas fa-key"></i> Reset Password</a>
-                <a class="dropdown-item"
-                    [routerLink]="['employer-edit']"
-                    routerLinkActive="active"><i class="fas fa-user-edit"></i> Edit Profile</a> -->
+            </li>
+            <li class="nav-item" *ngIf="carService.loggedIn();">
                 <a class="nav-link"
                     (click)="logout();">Logout</a>
             </li>
-
         </ul>
-    </div>
-</nav>
+    </nav>
+</body>
+</html>
