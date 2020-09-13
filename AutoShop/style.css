@@ -74,3 +74,8 @@
     flex-grow: 1;
     margin: 5%;
 }
+
+.voziloContainer{
+    display: flex;
+    flex-direction: row;
+}

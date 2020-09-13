@@ -1,6 +1,7 @@
-import { vratiRadionice } from "./models/radionica.service"
+import { vratiRadionice } from "./models/radionica.service";
 import { Radionica } from "./models/radionica";
 import { Vozilo } from "./models/vozilo";
+import * as indexTs from "./../index";
 export class View
 {
     container: HTMLDivElement;
@@ -13,7 +14,7 @@ export class View
         this.container.id = "container";
         this.header = document.createElement("div");
         this.header.className = "header";
-        var naslov = document.createElement("h2");
+        const naslov = document.createElement("h2");
         naslov.innerHTML = "Servis vozila";
         this.header.appendChild(naslov);
         this.container.appendChild(this.header);
@@ -22,6 +23,11 @@ export class View
         this.mainContainer.className = "main";
         this.mainContainer.id = "main";
         this.container.appendChild(this.mainContainer);
+
+        const mainContainer2 = document.createElement("div");
+        mainContainer2.className = "main";
+        mainContainer2.id = "main2";
+        this.container.appendChild(mainContainer2);
 
         this.crtajGarazu(this.mainContainer);
         
@@ -152,20 +158,10 @@ export class View
 
     export function NapraviMesto()
     {
-        const path = document.getElementById("main");
+        const path = document.getElementById("main2");
         const lista = document.createElement("div");// div cele garaze
         lista.className = "lista"; 
-        const danas = document.createElement("div");
-        danas.className = "danas";
-        const danasUL = document.createElement("ul");
-        danasUL.className = "danasUL";
-        danasUL.id = "danasUL";
 
-        const labela = document.createElement("label");
-        labela.innerHTML = "Vozila koja ce danas biti uradjena:";
-        danas.appendChild(labela);
-
-        danas.appendChild(danasUL);
         const sve = document.createElement("div");
         sve.className = "danas";
         const sveUL = document.createElement("ul");
@@ -173,33 +169,62 @@ export class View
         sveUL.id = "sveUL";
 
         const labela2 = document.createElement("label");
-        labela2.innerHTML = "Sva vozila od danas: ";
+        labela2.innerHTML = "Sva vozila za servis: ";
         sve.appendChild(labela2);
 
         sve.appendChild(sveUL);
-        lista.appendChild(danas);
+         
+        const danas = document.createElement("div");
+        danas.className = "danas";
+        const danasUL = document.createElement("ul");
+        danasUL.className = "danasUL";
+        danasUL.id = "danasUL";
+
+        const labela = document.createElement("label");
+        labela.innerHTML = "Vozila koja su danas uradjena:";
+        danas.appendChild(labela);
+
+        danas.appendChild(danasUL);
         lista.appendChild(sve);
+        lista.appendChild(danas);
         path.appendChild(lista);
     }
-    let i = 0;
-    export function iscrtajDanasnjaVozila(vozila : any)
+    //let i = 0;
+    export function iscrtajDanasnjaVozila(vozila : Vozilo)
     {
-        i++;
-        if(vozila.id == i)
-        {
-            //danas vozila
-            const ul = document.getElementById("danasUL");
-            const podatak = document.createElement("li");
-            podatak.innerHTML = vozila.marka + " " + vozila.oznaka;
-            ul.appendChild(podatak);
+        // i++;
+        // if(vozila.id == i)
+        // {
+        //     //danas vozila
+        //     const ul = document.getElementById("danasUL");
+        //     const podatak = document.createElement("li");
+        //     podatak.innerHTML = vozila.marka + " " + vozila.oznaka;
+        //     ul.appendChild(podatak);
+        // }
+        // else
+        // {
+        //     //sva vozila
+        //     const ul = document.getElementById("sveUL");
+        //     const podatak = document.createElement("li");
+        //     podatak.innerHTML = vozila.marka + " " + vozila.oznaka;
+        //     ul.appendChild(podatak);
+        // }
+
+        //Iscrtava vozilo u neuredjenoj listi za izbor vozila
+        const ul = document.getElementById("sveUL");
+        const voziloContainer = document.createElement("div");
+        voziloContainer.className = "voziloContainer";
+        const podatak = document.createElement("li");
+        podatak.innerHTML = vozila.marka + " " + vozila.oznaka + " " + vozila.registracija;
+        voziloContainer.appendChild(podatak);
+        const dugme = document.createElement("button");
+        dugme.className = "UbaciVoziloButton";
+        dugme.innerHTML = "Ubaci vozilo";
+        dugme.onclick = (ev) => {
+            //ovde stavi za poziv funkcije za ubacivanje vozila
+            indexTs.ProslediUServis(vozila);
         }
-        else
-        {
-            //sva vozila
-            const ul = document.getElementById("sveUL");
-            const podatak = document.createElement("li");
-            podatak.innerHTML = vozila.marka + " " + vozila.oznaka;
-            ul.appendChild(podatak);
-        }        
+        voziloContainer.appendChild(dugme);
+        ul.appendChild(voziloContainer);
     }
     
