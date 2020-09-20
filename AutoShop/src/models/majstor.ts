@@ -1,12 +1,12 @@
 export class Majstor
 {
-    id: any;
-    ime: any;
-    poznaje: any;
+    id: number;
+    ime: string;
+    poznaje: string;
     zauzet: boolean;
-    radiNa: any;
+    radiNa: string;
     
-    constructor(id: any, ime: any, poznaje: any)
+    constructor(id: number, ime: string, poznaje: string)
     {
         this.id = id;
         this.ime = ime;

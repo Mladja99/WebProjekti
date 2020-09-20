@@ -1,13 +1,14 @@
 export class Vozilo
 {
     id: number;
-    marka: any;
-    oznaka: any;
-    registracija: any;
-    vrstaKvara: any;
-    opisProblema: any;
+    marka: string;
+    oznaka: string;
+    registracija: string;
+    vrstaKvara: string;
+    opisProblema: string;
     status: string;
-    constructor(id:number, marka:any, oznaka:any, registracija:any, vrstaKvara:any, opisProblema:any)
+    
+    constructor(id:number, marka:string, oznaka:string, registracija:string, vrstaKvara:string, opisProblema:string)
     {
         this.marka = marka;
         this.oznaka = oznaka;

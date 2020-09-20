@@ -9,10 +9,10 @@ import { Vozilo } from "./src/models/vozilo";
 const css = require('./style.css');
 const view = new View(document.body);
 
-const source = interval(Math.floor(Math.random()*2000)+2500);
+//const source = interval(Math.floor(Math.random()*2000)+2500);
 //var SvaVozila = vratiVozila().then(e => e.map((x:any) => x["registracija"]));
-var SviMajstori = vratiMajstore().then(e => e.map((x:any) => x.ime));
-var SviSegrti = vratiSegrte().then(e => e.map((x:any) => x.ime));
+//var SviMajstori = vratiMajstore().then(e => e.map((x:any) => x.ime));
+//var SviSegrti = vratiSegrte().then(e => e.map((x:any) => x.ime));
 //var vozilaObservable = from(SvaVozila);
 
 // vozilaObservable.pipe(
@@ -22,8 +22,9 @@ var SviSegrti = vratiSegrte().then(e => e.map((x:any) => x.ime));
 //     merge(res,v).subscribe(x=>iscrtajDanasnjaVozila(x));
 // }));
 
-vratiVozila().subscribe(data => {
+const prikaziVozilaNaCekanju = vratiVozila().subscribe(data => {
     NapraviMesto();
+    data = data.filter((vozilo:Vozilo) => vozilo.status === "");
     data.forEach((element:Vozilo) => {
         iscrtajDanasnjaVozila(element);
     });
@@ -46,5 +47,4 @@ export async function ProslediUServis(vozilo : Vozilo)
     DolazakVozila(vozilo);
 }
 
-var radnici = zip(from(SviMajstori),from(SviSegrti),(majstori,segrti)=>({majstori,segrti}));
-radnici.subscribe(x=>iscrtajDanasnjeRadnike(x));
+zip(vratiMajstore,vratiSegrte,(majstori,segrti)=>({majstori,segrti})).subscribe(x=>iscrtajDanasnjeRadnike(x));

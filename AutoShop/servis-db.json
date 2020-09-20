@@ -1,190 +1,194 @@
 {
-    "majstori":[
-        {
-            "id" : "1",
-            "ime" : "Pera",
-            "poznaje" : "ecu, mehanika, elektrika",
-            "zauzet" : false,
-            "radiNa" : ""
-        },
-        {
-            "id" : "2",
-            "ime" : "Mika",
-            "poznaje" : "mehanika, limarija",
-            "zauzet" : false,
-            "radiNa" : ""
-        }
-    ],
-    "segrti":[
-        {
-            "id" : "3",
-            "ime" : "Djoka",
-            "zauzet" : false,
-            "radiNa" : ""
-        },
-        {
-            "id" : "4",
-            "ime" : "Laza",
-            "zauzet" : false,
-            "radiNa" : ""
-        }
-    ],
-    "radionice":[
-        {
-            "vozilo": null,
-            "vrsta": "ecu",
-            "zauzeto": false,
-            "majstor": null,
-            "segrt": null
-        },
-        {
-            "vozilo": null,
-            "vrsta": "elektrika",
-            "zauzeto": false,
-            "majstor": null,
-            "segrt": null
-        },
-        {
-            "vozilo": null,
-            "vrsta": "mehanika",
-            "zauzeto": false,
-            "majstor": null,
-            "segrt": null
-        },
-        {
-            "vozilo": null,
-            "vrsta": "limarija",
-            "zauzeto": false,
-            "majstor": null,
-            "segrt": null
-        }
-    ],
-    "vozila":[
-        {
-            "id" : 1,
-            "marka" : "BMW",
-            "oznaka" : "E90",
-            "registracija" : "a111111",
-            "vrstaKvara" : "ecu",
-            "opisProblema" : "",
-            "status" : ""
-        },
-        {
-            "id" : 2,
-            "marka" : "BMW",
-            "oznaka" : "E46",
-            "registracija" : "a222222",
-            "vrstaKvara" : "mehanika",
-            "opisProblema" : "",
-            "status" : ""
-        },
-        {
-            "id" : 3,
-            "marka" : "Renault",
-            "oznaka" : "4",
-            "registracija" : "a333333",
-            "vrstaKvara" : "mehanika",
-            "opisProblema" : "",
-            "status" : ""
-        },
-        {
-            "id" : 4,
-            "marka" : "Volkswagen",
-            "oznaka" : "Golf 4",
-            "registracija" : "a444444",
-            "vrstaKvara" : "elektrika",
-            "opisProblema" : "",
-            "status" : ""
-        },
-        {
-            "id" : 5,
-            "marka" : "Volksvagen",
-            "oznaka" : "Chirocco",
-            "registracija" : "a555555",
-            "vrstaKvara" : "elektrika",
-            "opisProblema" : "",
-            "status" : ""
-        },
-        {
-            "id" : 6,
-            "marka" : "Volksvagen",
-            "oznaka" : "Chirocco",
-            "registracija" : "a666666",
-            "vrstaKvara" : "ecu",
-            "opisProblema" : "",
-            "status" : ""
-        },
-        {
-            "id" : 7,
-            "marka" : "Golf",
-            "oznaka" : "6",
-            "registracija" : "a777777",
-            "vrstaKvara" : "limarija",
-            "opisProblema" : "",
-            "status" : ""
-        },
-        {
-            "id" : 8,
-            "marka" : "BMW",
-            "oznaka" : "e30",
-            "registracija" : "a888888",
-            "vrstaKvara" : "limarija",
-            "opisProblema" : "",
-            "status" : ""
-        },
-        {
-            "id" : 9,
-            "marka" : "BMW",
-            "oznaka" : "e87",
-            "registracija" : "a999999",
-            "vrstaKvara" : "ecu",
-            "opisProblema" : "",
-            "status" : ""
-        },
-        {
-            "id" : 10,
-            "marka" : "audi",
-            "oznaka" : "a6",
-            "registracija" : "a101010",
-            "vrstaKvara" : "mehanika",
-            "opisProblema" : "",
-            "status" : ""
-        },
-        {
-            "id" : 11,
-            "marka" : "audi",
-            "oznaka" : "a3",
-            "registracija" : "a121212",
-            "vrstaKvara" : "elektrika",
-            "opisProblema" : "",
-            "status" : ""
-        },
-        {
-            "id" : 12,
-            "marka" : "nissan",
-            "oznaka" : "r35",
-            "registracija" : "a131313",
-            "vrstaKvara" : "ecu",
-            "opisProblema" : "",
-            "status" : ""
-        },
-        {
-            "id" : 13,
-            "marka" : "fiat",
-            "oznaka" : "punto",
-            "registracija" : "a141414",
-            "vrstaKvara" : "mehanika",
-            "opisProblema" : "",
-            "status" : ""
-        },
-        {
-            "id" : 14,
-            "marka" : "fiat",
-            "oznaka" : "punto",
-            "registracija" : "a151515",
-            "vrstaKvara" : "limarija",
-            "opisProblema" : "",
-            "status" : ""
-        }
-    ]
+  "majstori": [
+    {
+      "id": "1",
+      "ime": "Pera",
+      "poznaje": "ecu, mehanika, elektrika",
+      "zauzet": false,
+      "radiNa": ""
+    },
+    {
+      "id": "2",
+      "ime": "Mika",
+      "poznaje": "mehanika, limarija",
+      "zauzet": false,
+      "radiNa": ""
+    }
+  ],
+  "segrti": [
+    {
+      "id": "3",
+      "ime": "Djoka",
+      "zauzet": false,
+      "radiNa": ""
+    },
+    {
+      "id": "4",
+      "ime": "Laza",
+      "zauzet": false,
+      "radiNa": ""
+    }
+  ],
+  "radionice": [
+    {
+      "id": 0,
+      "vozilo": 1,
+      "vrsta": "ecu",
+      "zauzeto": true,
+      "majstor": null,
+      "segrt": null
+    },
+    {
+      "id": 1,
+      "vozilo": 4,
+      "vrsta": "elektrika",
+      "zauzeto": false,
+      "majstor": null,
+      "segrt": null
+    },
+    {
+      "id": 2,
+      "vozilo": 2,
+      "vrsta": "mehanika",
+      "zauzeto": true,
+      "majstor": null,
+      "segrt": null
+    },
+    {
+      "id": 3,
+      "vozilo": 7,
+      "vrsta": "limarija",
+      "zauzeto": false,
+      "majstor": null,
+      "segrt": null
+    }
+  ],
+  "vozila": [
+    {
+      "id": 1,
+      "marka": "BMW",
+      "oznaka": "E90",
+      "registracija": "a111111",
+      "vrstaKvara": "ecu",
+      "opisProblema": "",
+      "status": "Ceka segrta da ubaci vozilo"
+    },
+    {
+      "id": 2,
+      "marka": "BMW",
+      "oznaka": "E46",
+      "registracija": "a222222",
+      "vrstaKvara": "mehanika",
+      "opisProblema": "",
+      "status": "Ceka segrta da ubaci vozilo"
+    },
+    {
+      "id": 3,
+      "marka": "Renault",
+      "oznaka": "4",
+      "registracija": "a333333",
+      "vrstaKvara": "mehanika",
+      "opisProblema": "",
+      "status": ""
+    },
+    {
+      "id": 4,
+      "marka": "Volkswagen",
+      "oznaka": "Golf 4",
+      "registracija": "a444444",
+      "vrstaKvara": "elektrika",
+      "opisProblema": "",
+      "status": ""
+    },
+    {
+      "id": 5,
+      "marka": "Volksvagen",
+      "oznaka": "Chirocco",
+      "registracija": "a555555",
+      "vrstaKvara": "elektrika",
+      "opisProblema": "",
+      "status": ""
+    },
+    {
+      "id": 6,
+      "marka": "Volksvagen",
+      "oznaka": "Chirocco",
+      "registracija": "a666666",
+      "vrstaKvara": "ecu",
+      "opisProblema": "",
+      "status": ""
+    },
+    {
+      "id": 7,
+      "marka": "Golf",
+      "oznaka": "6",
+      "registracija": "a777777",
+      "vrstaKvara": "limarija",
+      "opisProblema": "",
+      "status": ""
+    },
+    {
+      "id": 8,
+      "marka": "BMW",
+      "oznaka": "e30",
+      "registracija": "a888888",
+      "vrstaKvara": "limarija",
+      "opisProblema": "",
+      "status": ""
+    },
+    {
+      "id": 9,
+      "marka": "BMW",
+      "oznaka": "e87",
+      "registracija": "a999999",
+      "vrstaKvara": "ecu",
+      "opisProblema": "",
+      "status": ""
+    },
+    {
+      "id": 10,
+      "marka": "audi",
+      "oznaka": "a6",
+      "registracija": "a101010",
+      "vrstaKvara": "mehanika",
+      "opisProblema": "",
+      "status": ""
+    },
+    {
+      "id": 11,
+      "marka": "audi",
+      "oznaka": "a3",
+      "registracija": "a121212",
+      "vrstaKvara": "elektrika",
+      "opisProblema": "",
+      "status": ""
+    },
+    {
+      "id": 12,
+      "marka": "nissan",
+      "oznaka": "r35",
+      "registracija": "a131313",
+      "vrstaKvara": "ecu",
+      "opisProblema": "",
+      "status": ""
+    },
+    {
+      "id": 13,
+      "marka": "fiat",
+      "oznaka": "punto",
+      "registracija": "a141414",
+      "vrstaKvara": "mehanika",
+      "opisProblema": "",
+      "status": ""
+    },
+    {
+      "id": 14,
+      "marka": "fiat",
+      "oznaka": "punto",
+      "registracija": "a151515",
+      "vrstaKvara": "limarija",
+      "opisProblema": "",
+      "status": ""
+    }
+  ]
 }

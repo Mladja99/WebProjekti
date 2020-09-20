@@ -1,10 +1,10 @@
 export class Segrt
 {
-    id: any;
-    ime: any;
+    id: number;
+    ime: string;
     zauzet: boolean;
-    radiNa: any;
-    constructor(id: any, ime: any)
+    radiNa: string;
+    constructor(id: number, ime: string)
     {
         this.id = id;
         this.ime = ime;

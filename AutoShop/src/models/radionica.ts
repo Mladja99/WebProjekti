@@ -3,13 +3,15 @@ import { Majstor } from "./majstor";
 import { Segrt } from "./segrt";
 export class Radionica
 {
-    vozilo: any;
-    vrsta: any;
+    id: number;
+    vozilo: number;
+    vrsta: string;
     zauzeto: boolean;
-    majstor: any;
-    segrt: any;
-    constructor(vrsta:any)
+    majstor: number;
+    segrt: number;
+    constructor(vrsta:string, id:number)
     {
+        this.id = id;
         this.vozilo = null;
         this.vrsta = vrsta;
         this.zauzeto = false;

@@ -36,7 +36,7 @@ export class View
 
     crtajGarazu(path: HTMLDivElement)
     {
-        vratiRadionice().then((radionice) => 
+        vratiRadionice().subscribe((radionice) => {
             radionice.forEach((radionica: Radionica) => {
                 const garaza = document.createElement("div");// div cele garaze
                 garaza.className = "garaza"; 
@@ -52,8 +52,8 @@ export class View
                 garaza.appendChild(header);
                 garaza.appendChild(data);
                 path.appendChild(garaza);
-            })
-        )
+            });
+        })
         
     }
 }
