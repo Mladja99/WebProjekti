@@ -29,10 +29,17 @@ export function vratiSlobodnogMajstora():Observable<Majstor[]>
             }
         }),
     )  
-    return data$.pipe(take(1));
+    return data$;
 }
 
-export function updateMajstor(majstor:Majstor):void
+export async function vratiMajtoraPoID(id:number):Promise<Majstor>
+{
+    return await fetch(url_majstori + "/" + id)
+        .then((res) => res.json())
+        .catch((err) => console.log(err));
+}
+
+export async function updateMajstor(majstor:Majstor):Promise<void>
 {
     console.log(majstor);
     const UpdateTask ={
@@ -40,5 +47,5 @@ export function updateMajstor(majstor:Majstor):void
         body: JSON.stringify(majstor),
         headers:{'Content-Type':'application/json'},
     };
-    fetch(url_majstori+"/"+majstor.id, UpdateTask);
+    await fetch(url_majstori+"/"+majstor.id, UpdateTask);
 }

@@ -32,15 +32,15 @@
   "radionice": [
     {
       "id": 0,
-      "vozilo": 1,
+      "vozilo": null,
       "vrsta": "ecu",
-      "zauzeto": true,
+      "zauzeto": false,
       "majstor": null,
       "segrt": null
     },
     {
       "id": 1,
-      "vozilo": 4,
+      "vozilo": null,
       "vrsta": "elektrika",
       "zauzeto": false,
       "majstor": null,
@@ -48,9 +48,9 @@
     },
     {
       "id": 2,
-      "vozilo": 2,
+      "vozilo": null,
       "vrsta": "mehanika",
-      "zauzeto": true,
+      "zauzeto": false,
       "majstor": null,
       "segrt": null
     },
@@ -71,7 +71,7 @@
       "registracija": "a111111",
       "vrstaKvara": "ecu",
       "opisProblema": "",
-      "status": "Ceka segrta da ubaci vozilo"
+      "status": "Izbacuje se"
     },
     {
       "id": 2,
@@ -80,7 +80,7 @@
       "registracija": "a222222",
       "vrstaKvara": "mehanika",
       "opisProblema": "",
-      "status": "Ceka segrta da ubaci vozilo"
+      "status": "Izbacuje se"
     },
     {
       "id": 3,
@@ -89,7 +89,7 @@
       "registracija": "a333333",
       "vrstaKvara": "mehanika",
       "opisProblema": "",
-      "status": ""
+      "status": "Izbacuje se"
     },
     {
       "id": 4,
@@ -98,14 +98,14 @@
       "registracija": "a444444",
       "vrstaKvara": "elektrika",
       "opisProblema": "",
-      "status": ""
+      "status": "Izbacuje se"
     },
     {
       "id": 5,
       "marka": "Volksvagen",
       "oznaka": "Chirocco",
       "registracija": "a555555",
-      "vrstaKvara": "elektrika",
+      "vrstaKvara": "ecu",
       "opisProblema": "",
       "status": ""
     },

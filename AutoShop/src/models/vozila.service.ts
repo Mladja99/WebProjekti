@@ -43,7 +43,7 @@ export function getVoziloByReg(reg:string):Observable<Vozilo[]> {
   return data$;
 }
 
-export function updateVozilo(vozilo:Vozilo):void
+export async function updateVozilo(vozilo:Vozilo):Promise<void>
 {
   console.log(vozilo);
   const UpdateTask ={
@@ -51,10 +51,10 @@ export function updateVozilo(vozilo:Vozilo):void
       body: JSON.stringify(vozilo),
       headers:{'Content-Type':'application/json'},
   };
-  fetch(url_vozila+"/"+vozilo.id,UpdateTask);
+  await fetch(url_vozila+"/"+vozilo.id,UpdateTask);
 }
 
-export function vratiVoziloPoID(id:number):Observable<Vozilo[]>
+export function vratiVoziloPoID(id:number):Observable<Vozilo>
 {
   const data$ = fromFetch(url_vozila + "/" + id).pipe(
     switchMap(response => {

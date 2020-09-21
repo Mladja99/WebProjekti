@@ -32,7 +32,7 @@ export function vratiSlobodnogSegrta():Observable<Segrt[]>
     return data$;
 }
 
-export function updateSergrt(segrt:Segrt):void
+export async function updateSergrt(segrt:Segrt):Promise<void>
 {
     console.log(segrt);
     const UpdateTask ={
@@ -40,5 +40,5 @@ export function updateSergrt(segrt:Segrt):void
         body: JSON.stringify(segrt),
         headers:{'Content-Type':'application/json'},
     };
-    fetch(url_segrti+"/"+segrt.id, UpdateTask);
+    await fetch(url_segrti+"/"+segrt.id, UpdateTask);
 }

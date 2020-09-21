@@ -7,8 +7,9 @@ import { take } from "rxjs/operators";
 import { vratiRadionice, vratiRadionicuPoVrsti, updateRadionica } from "./models/radionica.service";
 import { Radionica } from "./models/radionica";
 import { interval, timer , zip} from "rxjs";
-import {crtajVozilo,IspisiMajstora,IzbrisiMajstora,brisiVozilo} from "./view"
+import {crtajVozilo,IspisiMajstora,IzbrisiMajstora,brisiVozilo, IscrtajUradjenoVozilo} from "./view"
 import { updateVozilo, vratiVoziloPoID } from "./models/vozila.service";
+import { ucitaj } from "./../index";
 
     // var Majstori: Majstor[] = [];
     // vratiMajstore().then(data => {
@@ -34,12 +35,12 @@ import { updateVozilo, vratiVoziloPoID } from "./models/vozila.service";
     //     })
     // });
 
-    var VozilaNaCekanju: Vozilo[] = [];
-    var prviProlaz = 0;
+    // var VozilaNaCekanju: Vozilo[] = [];
+    // var prviProlaz = 0;
 
-    var int1: any;
-    var int2: any;
-    var int3: any;
+    // var int1: any;
+    // var int2: any;
+    // var int3: any;
 
     export async function Glavna(vozilo:Vozilo) 
     {        
@@ -67,7 +68,7 @@ import { updateVozilo, vratiVoziloPoID } from "./models/vozila.service";
         // });
     }
 
-    export async function DolazakVozila(vozilo:Vozilo) 
+    export async function DolazakVozila(vozilo:Vozilo):Promise<boolean>
     {        
         // if(prviProlaz == 0)
         // {
@@ -75,19 +76,27 @@ import { updateVozilo, vratiVoziloPoID } from "./models/vozila.service";
         //     Glavna();
         // }
         // VozilaNaCekanju.push(vozilo);
-        vratiRadionicuPoVrsti(vozilo.vrstaKvara).subscribe(radionica => {
-            if(!radionica[0].zauzeto)
-            {
-                console.log(radionica[0]);
-                radionica[0].zauzeto = true;
-                radionica[0].vozilo = vozilo.id;
-                updateRadionica(radionica[0]);
-                vozilo.status = "Ceka segrta da ubaci vozilo";
-                updateVozilo(vozilo);
-                SegrtUbacujeVozilo(vozilo);
-            }
-        })
-        
+        return new Promise<boolean>((resolve,reject)=>{
+            vratiRadionicuPoVrsti(vozilo.vrstaKvara).subscribe(async radionica => {
+                console.log(radionica)
+                if(!radionica[0].zauzeto)
+                {
+                    console.log(radionica[0]);
+                    radionica[0].zauzeto = true;
+                    radionica[0].vozilo = vozilo.id;
+                    await updateRadionica(radionica[0]);
+                    vozilo.status = "Ceka segrta da ubaci vozilo";
+                    await updateVozilo(vozilo);
+                    await SegrtUbacujeVozilo(vozilo);
+                    resolve(true);
+                }
+                else
+                {
+                    console.log("Radionica je zauzeta");
+                    reject("Radionica je zauzeta");
+                }
+            });
+        });
     }
 
     async function SegrtUbacujeVozilo(vozilo:Vozilo)
@@ -127,25 +136,25 @@ import { updateVozilo, vratiVoziloPoID } from "./models/vozila.service";
             console.log(segrt);
             if(segrt.length > 0)
             {
-                return new Promise((resolve,reject)=>{
+                return new Promise(async (resolve,reject)=>{
                     segrt[0].zauzet=true;
-                    updateSergrt(segrt[0]);
-                    vratiRadionicuPoVrsti(vozilo.vrstaKvara).subscribe(rad => {
+                    await updateSergrt(segrt[0]);
+                    vratiRadionicuPoVrsti(vozilo.vrstaKvara).subscribe(async rad => {
                         if(rad.length > 0)
                         {     
                             rad[0].zauzeto == true;
-                            updateRadionica(rad[0]);
+                            await updateRadionica(rad[0]);
                             let interval$ = interval(Math.floor(Math.random()*3000)+3000);
                             let pauza = interval$.pipe(take(1))
-                            pauza.subscribe(()=>{
+                            pauza.subscribe(async ()=>{
                                 rad[0].vozilo = vozilo.id;
-                                updateRadionica(rad[0]);
+                                await updateRadionica(rad[0]);
                                 vozilo.status="Ceka Majstora";
-                                updateVozilo(vozilo);
+                                await updateVozilo(vozilo);
                                 crtajVozilo(vozilo);
                                 segrt[0].zauzet = false;
                                 segrt[0].radiNa = "";
-                                updateSergrt(segrt[0]);
+                                await updateSergrt(segrt[0]);
                                 resolve(true);
                             })
                         }
@@ -160,40 +169,40 @@ import { updateVozilo, vratiVoziloPoID } from "./models/vozila.service";
         });
     }
 
-    async function PosaljiMajstoraDaRadi(vozilo:Vozilo)
+    export async function PosaljiMajstoraDaRadi(vozilo:Vozilo)
     {
         vratiSlobodnogMajstora().subscribe(majstor => {
             if(majstor.length > 0)
             {
                 return new Promise((resolve,reject)=>{
-                    vratiRadionicuPoVrsti(vozilo.vrstaKvara).subscribe(rad => {
-                        if(!rad[0].zauzeto)
+                    vratiRadionicuPoVrsti(vozilo.vrstaKvara).subscribe(async rad => {
+                        if(rad.length > 0)
                         {
                             majstor[0].radiNa = vozilo.id.toString();
                             majstor[0].zauzet = true;
-                            updateMajstor(majstor[0]);
+                            await updateMajstor(majstor[0]);
                             vozilo.status = "Majstor Radi";
-                            updateVozilo(vozilo);
+                            await updateVozilo(vozilo);
                             rad[0].majstor = majstor[0].id;
-                            updateRadionica(rad[0]);
+                            await updateRadionica(rad[0]);
                             IspisiMajstora(rad[0]);
-                            MajstorRadiNaVozilu(vozilo).then(()=>{
+                            MajstorRadiNaVozilu(vozilo).then(async ()=>{
                                 majstor[0].zauzet = false;
                                 majstor[0].radiNa = "";
-                                updateMajstor(majstor[0]);
+                                await updateMajstor(majstor[0]);
                                 rad[0].majstor = null;
-                                updateRadionica(rad[0]);
+                                await updateRadionica(rad[0]);
                                 vozilo.status = "Popravljeno";
-                                updateVozilo(vozilo);
+                                await updateVozilo(vozilo);
                                 IzbrisiMajstora(rad[0]);
                                 resolve(true);
                             })
                         }
-                        else console.log("radionica je zauzeta");
+                        else throw new Error("radionica je zauzeta");
                     });
                 })
             }
-            else console.log("Trenutno su svi majstori zauzeti");
+            else throw new Error("Trenutno su svi majstori zauzeti");
         });
     }
     
@@ -202,34 +211,36 @@ import { updateVozilo, vratiVoziloPoID } from "./models/vozila.service";
         return new Promise((resolve,reject)=>{
             let interval$ = interval(Math.floor(Math.random()*5000)+4000);
             let pauza = interval$.pipe(take(1))
-            pauza.subscribe(()=>{
+            pauza.subscribe(async ()=>{
                 vozilo.status = "Majstor Radi";
-                updateVozilo(vozilo);
+                await updateVozilo(vozilo);
                 resolve(true);
             });
         })
     }
 
-    async function SegrtIzbacujeVozilo(radionica:Radionica) 
+    export async function SegrtIzbacujeVozilo(radionica:Radionica) 
     {
         vratiSlobodnogSegrta().subscribe(segrt => {
             if(segrt.length > 0)
             {
-                return new Promise((resolve,reject)=>{
+                return new Promise(async (resolve,reject)=>{
                     segrt[0].zauzet=true;
-                    updateSergrt(segrt[0]);
-                    vratiVoziloPoID(radionica.vozilo).subscribe(vozilo =>{
-                        vozilo[0].status = "Izbacuje se";
-                        updateVozilo(vozilo[0]);
+                    await updateSergrt(segrt[0]);
+                    vratiVoziloPoID(radionica.vozilo).subscribe(async vozilo =>{
+                        console.log("vozilo",vozilo);
+                        vozilo.status = "Izbacuje se";
+                        await updateVozilo(vozilo);
                         let interval$ = interval(Math.floor(Math.random()*3000)+3000);
                         let pauza = interval$.pipe(take(1))
-                        pauza.subscribe(()=>{
+                        pauza.subscribe(async ()=>{
                             radionica.vozilo = null;
                             radionica.zauzeto = false;
-                            updateRadionica(radionica);
+                            await updateRadionica(radionica);
                             segrt[0].zauzet = false;
-                            updateSergrt(segrt[0]);
+                            await updateSergrt(segrt[0]);
                             brisiVozilo(radionica.vrsta);
+                            IscrtajUradjenoVozilo(vozilo);
                             resolve(true);
                         });
                     });                    

@@ -1,4 +1,4 @@
-import { View , iscrtajDanasnjeRadnike, iscrtajDanasnjaVozila, NapraviMesto} from "./src/view";
+import { View , iscrtajDanasnjeRadnike, iscrtajDanasnjaVozila, NapraviMesto } from "./src/view";
 import { DolazakVozila } from "./src/servis"
 import { vratiVozila, getVoziloByReg } from "./src/models/vozila.service";
 import { from, interval, timer , merge , zip} from "rxjs";
@@ -22,16 +22,20 @@ const view = new View(document.body);
 //     merge(res,v).subscribe(x=>iscrtajDanasnjaVozila(x));
 // }));
 
-const prikaziVozilaNaCekanju = vratiVozila().subscribe(data => {
-    NapraviMesto();
-    data = data.filter((vozilo:Vozilo) => vozilo.status === "");
-    data.forEach((element:Vozilo) => {
-        iscrtajDanasnjaVozila(element);
+export function ucitaj():void
+{
+    vratiVozila().subscribe(data => {
+        NapraviMesto();
+        data = data.filter((vozilo:Vozilo) => vozilo.status === "");
+        data.forEach((element:Vozilo) => {
+            iscrtajDanasnjaVozila(element);
+        });
     });
-});
+}
 
+ucitaj();
 //var timer$ = timer(30000);
-export async function ProslediUServis(vozilo : Vozilo)
+export async function ProslediUServis(vozilo : Vozilo):Promise<boolean>
 {   
     // return new Promise((resolve,reject)=>{
     //     var VozilaZaDanas:any[] = [];
@@ -44,7 +48,10 @@ export async function ProslediUServis(vozilo : Vozilo)
     //         resolve(VozilaZaDanas);
     //     },30000);
     // })
-    DolazakVozila(vozilo);
+    return DolazakVozila(vozilo);
 }
 
-zip(vratiMajstore,vratiSegrte,(majstori,segrti)=>({majstori,segrti})).subscribe(x=>iscrtajDanasnjeRadnike(x));
+zip(vratiMajstore(),vratiSegrte(),(majstori,segrti)=>({majstori,segrti})).subscribe(x=>{
+    iscrtajDanasnjeRadnike(x);
+    console.log(x);
+});

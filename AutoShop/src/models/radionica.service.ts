@@ -31,7 +31,7 @@ export function vratiRadionicuPoVrsti(vrsta:string):Observable<Radionica[]>
     return data$;
 }
 
-export function updateRadionica(radionica:Radionica):void
+export async function updateRadionica(radionica:Radionica):Promise<void>
 {
     console.log(radionica);
     const UpdateTask ={
@@ -39,5 +39,5 @@ export function updateRadionica(radionica:Radionica):void
         body: JSON.stringify(radionica),
         headers:{'Content-Type':'application/json'},
     };
-    fetch(url_radionice+"/"+radionica.id, UpdateTask);
+    await fetch(url_radionice+"/"+radionica.id, UpdateTask);
 }
