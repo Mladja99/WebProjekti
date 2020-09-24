@@ -34,7 +34,6 @@ export function vratiRadionicuPoVrsti(vrsta:string):Observable<Radionica[]>
 //radi update radionice
 export async function updateRadionica(radionica:Radionica):Promise<void>
 {
-    console.log(radionica);
     const UpdateTask ={
         method:"put",
         body: JSON.stringify(radionica),

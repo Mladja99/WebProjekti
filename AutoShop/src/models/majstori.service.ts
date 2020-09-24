@@ -41,7 +41,6 @@ export async function vratiMajtoraPoID(id:number):Promise<Majstor>
 //Ubacuje izmene u bazu
 export async function updateMajstor(majstor:Majstor):Promise<void>
 {
-    console.log(majstor);
     const UpdateTask ={
         method:"put",
         body: JSON.stringify(majstor),

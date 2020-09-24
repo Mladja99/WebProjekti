@@ -1,4 +1,4 @@
-import { from, Observable } from "rxjs";
+import { Observable } from "rxjs";
 import { Vozilo } from "./vozilo";
 import {fromFetch} from 'rxjs/fetch'
 import { switchMap } from "rxjs/operators";
@@ -33,7 +33,6 @@ export function getVoziloByReg(reg:string):Observable<Vozilo[]> {
 //radi update za vozilo
 export async function updateVozilo(vozilo:Vozilo):Promise<void>
 {
-  console.log(vozilo);
   const UpdateTask ={
       method:"put",
       body: JSON.stringify(vozilo),

@@ -7,7 +7,7 @@
       "registracija": "a111111",
       "vrstaKvara": "ecu",
       "opisProblema": "",
-      "status": "Izbacuje se",
+      "status": "",
       "profit": 100
     },
     {
@@ -17,7 +17,7 @@
       "registracija": "a222222",
       "vrstaKvara": "mehanika",
       "opisProblema": "",
-      "status": "Izbacuje se",
+      "status": "",
       "profit": 20
     },
     {
@@ -27,7 +27,7 @@
       "registracija": "a333333",
       "vrstaKvara": "mehanika",
       "opisProblema": "",
-      "status": "Ceka Majstora",
+      "status": "",
       "profit": 10
     },
     {
@@ -37,7 +37,7 @@
       "registracija": "a444444",
       "vrstaKvara": "elektrika",
       "opisProblema": "",
-      "status": "Izbacuje se",
+      "status": "",
       "profit": 10
     },
     {
@@ -47,7 +47,7 @@
       "registracija": "a555555",
       "vrstaKvara": "ecu",
       "opisProblema": "",
-      "status": "Izbacuje se",
+      "status": "",
       "profit": 30
     },
     {
@@ -67,7 +67,7 @@
       "registracija": "a777777",
       "vrstaKvara": "limarija",
       "opisProblema": "",
-      "status": "Izbacuje se",
+      "status": "",
       "profit": 200
     },
     {
@@ -77,7 +77,7 @@
       "registracija": "a888888",
       "vrstaKvara": "limarija",
       "opisProblema": "",
-      "status": "Izbacuje se",
+      "status": "",
       "profit": 100
     },
     {
@@ -97,7 +97,7 @@
       "registracija": "a101010",
       "vrstaKvara": "mehanika",
       "opisProblema": "",
-      "status": "Izbacuje se",
+      "status": "",
       "profit": 15
     },
     {

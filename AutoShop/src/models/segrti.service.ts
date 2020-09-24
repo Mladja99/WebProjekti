@@ -1,7 +1,7 @@
 import { Observable } from "rxjs";
 import { Segrt } from "./segrt";
 import { fromFetch } from "rxjs/fetch";
-import { switchMap, take } from "rxjs/operators";
+import { switchMap } from "rxjs/operators";
 
 const url_segrti = "http://localhost:3003/segrti";
 //vraca sve segrte iz baze
@@ -34,7 +34,6 @@ export function vratiSlobodnogSegrta():Observable<Segrt[]>
 //radi update za segrta
 export async function updateSergrt(segrt:Segrt):Promise<void>
 {
-    console.log(segrt);
     const UpdateTask ={
         method:"put",
         body: JSON.stringify(segrt),

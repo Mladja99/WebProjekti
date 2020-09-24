@@ -1,6 +1,3 @@
-import { Vozilo } from "./vozilo";
-import { Majstor } from "./majstor";
-import { Segrt } from "./segrt";
 export class Radionica
 {
     id: number;

@@ -117,7 +117,6 @@ export function IspisiMajstora(radionica:Radionica)
     data.appendChild(podatak);
     const podatak2 = document.createElement("li");
     vratiMajtoraPoID(radionica.majstor).then (res => {
-        console.log(res)
         podatak2.innerHTML = res.ime;
     });
     data.appendChild(podatak2);
@@ -327,7 +326,6 @@ export function CrtajDugmeZaKrajRadnogVremena():void
 export function prikaziTrajanjeRadnogVremena(value:number):void
 {
     const container = document.getElementById("buttonContainer");
-    console.log(value);
 
     const podnaslov = document.createElement("h4");
     if(value % 10 === 1)
