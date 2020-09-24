@@ -1,0 +1,36 @@
+{
+  "radionice": [
+    {
+      "id": 0,
+      "vozilo": null,
+      "vrsta": "ecu",
+      "zauzeto": false,
+      "majstor": null,
+      "segrt": null
+    },
+    {
+      "id": 1,
+      "vozilo": 4,
+      "vrsta": "elektrika",
+      "zauzeto": true,
+      "majstor": null,
+      "segrt": null
+    },
+    {
+      "id": 2,
+      "vozilo": null,
+      "vrsta": "mehanika",
+      "zauzeto": false,
+      "majstor": null,
+      "segrt": null
+    },
+    {
+      "id": 3,
+      "vozilo": null,
+      "vrsta": "limarija",
+      "zauzeto": false,
+      "majstor": null,
+      "segrt": null
+    }
+  ]
+}

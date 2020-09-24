@@ -8,7 +8,11 @@
     "start": "webpack-dev-server --open",
     "build": "webpack",
     "watch": "webpack --watch",
-    "db": "json-server servis-db.json --watch"
+    "db": "json-server servis-db.json --watch",
+    "dbVozila": "json-server dbVozila.json --watch",
+    "dbMajstori": "json-server dbMajstori.json --watch --port 3001" ,
+    "dbRadionice": "json-server dbRadionice.json --watch --port 3002",    
+    "dbSegrti": "json-server dbSegrti.json --watch --port 3003"
   },
   "keywords": [],
   "author": "",

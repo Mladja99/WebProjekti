@@ -1,10 +1,10 @@
-import { View , iscrtajDanasnjeRadnike, iscrtajDanasnjaVozila, NapraviMesto } from "./src/view";
+import { View , iscrtajDanasnjeRadnike, iscrtajDanasnjaVozila, NapraviMesto, prikaziTrajanjeRadnogVremena, PrikaziDanasUradjenaVozila, NapraviZaPrikazUradjenihBozila } from "./src/view";
 import { DolazakVozila } from "./src/servis"
-import { vratiVozila, getVoziloByReg } from "./src/models/vozila.service";
-import { from, interval, timer , merge , zip} from "rxjs";
-import { switchMap, takeUntil, take } from "rxjs/operators";
+import { vratiVozila, getVoziloByReg, vratiZavrsenaVozila } from "./src/models/vozila.service";
+import { from, interval, timer , merge , zip, fromEvent} from "rxjs";
+import { switchMap, takeUntil, take, tap, takeLast, map, reduce, filter, count } from "rxjs/operators";
 import { vratiMajstore } from "./src/models/majstori.service";
-import { vratiSegrte } from "./src/models/segrti.service";
+import { vratiSegrte, vratiSlobodnogSegrta } from "./src/models/segrti.service";
 import { Vozilo } from "./src/models/vozilo";
 const css = require('./style.css');
 const view = new View(document.body);
@@ -34,6 +34,11 @@ export function ucitaj():void
 }
 
 ucitaj();
+merge(vratiMajstore(),vratiSegrte()).subscribe(x=>{
+    console.log(x);
+    iscrtajDanasnjeRadnike(x);
+});
+
 //var timer$ = timer(30000);
 export async function ProslediUServis(vozilo : Vozilo):Promise<boolean>
 {   
@@ -51,7 +56,40 @@ export async function ProslediUServis(vozilo : Vozilo):Promise<boolean>
     return DolazakVozila(vozilo);
 }
 
-zip(vratiMajstore(),vratiSegrte(),(majstori,segrti)=>({majstori,segrti})).subscribe(x=>{
-    iscrtajDanasnjeRadnike(x);
-    console.log(x);
-});
+
+export function RadnoVreme():void
+{
+    const dugme = document.getElementById("zatvori");
+    const dugmeklik$ = fromEvent(dugme, 'click');
+    console.log(dugme);
+    // const example = source.pipe(takeUntil(dugmeklik$));
+    // const subscribe = example.subscribe(val => console.log(val));
+    interval(5000).pipe(
+        takeUntil(dugmeklik$),
+        takeLast(1),
+        map(x=> {
+            prikaziTrajanjeRadnogVremena(x);
+            IzvuciVozilaKojaSuUradjena();
+        })
+    ).subscribe();
+}
+
+export function IzvuciVozilaKojaSuUradjena():void
+{
+    NapraviZaPrikazUradjenihBozila();
+
+    const container = document.getElementById("danasUL");
+    if(container.children !== null)
+    {
+        zip(
+            from(container.children).pipe( 
+                map( element => element.getElementsByTagName('li')[0].innerHTML),
+                tap(val => console.log(`BEFORE MAP: ${val}`)),
+            ),
+            from(container.children).pipe(
+                map( element => element.getElementsByTagName('li')[1].innerHTML),
+                tap(val => console.log(`BEFORE MAP2: ${val}`)),
+            )
+        ).subscribe(x => PrikaziDanasUradjenaVozila(x));
+    }
+}

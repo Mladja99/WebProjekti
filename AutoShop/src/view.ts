@@ -4,6 +4,8 @@ import { Vozilo } from "./models/vozilo";
 import * as indexTs from "./../index";
 import * as servisTs from "./servis";
 import { vratiMajtoraPoID } from "./models/majstori.service"
+import { Majstor } from "./models/majstor";
+import { Segrt } from "./models/segrt";
 export class View
 {
     container: HTMLDivElement;
@@ -21,6 +23,11 @@ export class View
         this.header.appendChild(naslov);
         this.container.appendChild(this.header);
 
+        const buttonContainer = document.createElement("div");
+        buttonContainer.className = "main2";
+        buttonContainer.id = "buttonContainer";
+        this.container.appendChild(buttonContainer);
+
         this.mainContainer = document.createElement("div");
         this.mainContainer.className = "main";
         this.mainContainer.id = "main";
@@ -34,8 +41,11 @@ export class View
         this.crtajGarazu(this.mainContainer);
         
         parent.appendChild(this.container);
-    }
 
+        CrtajDugmeZaPocetakRadnogVremena();
+        crtajFooter();
+    }
+    //funkcija koja crta div za garazu postavlja header i sve za prikaz te jedne radionice
     crtajGarazu(path: HTMLDivElement)
     {
         vratiRadionice().subscribe((radionice) => {
@@ -61,269 +71,286 @@ export class View
         
     }
 }
-    export function crtajVozilo(vozilo:Vozilo)
-    {
-        const garaza = document.getElementById(vozilo.vrstaKvara);
+//funkcija koja se koristi za prikaz vozila
+export function crtajVozilo(vozilo:Vozilo)
+{
+    const garaza = document.getElementById(vozilo.vrstaKvara);
 
-        const data = document.createElement("ul");
+    const data = document.createElement("ul");
 
-        const podatak = document.createElement("li");
-        podatak.innerHTML = vozilo.marka;
-        data.appendChild(podatak);
+    const podatak = document.createElement("li");
+    podatak.innerHTML = vozilo.marka;
+    data.appendChild(podatak);
 
-        const podatak2 = document.createElement("li");
-        podatak2.innerHTML = vozilo.oznaka;
-        data.appendChild(podatak2);
+    const podatak2 = document.createElement("li");
+    podatak2.innerHTML = vozilo.oznaka;
+    data.appendChild(podatak2);
 
-        const podatak3 = document.createElement("li");
-        podatak3.innerHTML = vozilo.registracija;
-        data.appendChild(podatak3);
+    const podatak3 = document.createElement("li");
+    podatak3.innerHTML = vozilo.registracija;
+    data.appendChild(podatak3);
 
-        const dugme = document.createElement("button");
-        dugme.innerHTML = "Posalji majstora";
-        dugme.onclick = (ev) => {
-            servisTs.PosaljiMajstoraDaRadi(vozilo)
-            .then(() =>{
-                dugme.remove();
-            })
-            .catch(error => {
-                const lblError = garaza.querySelector("errorMessage");
-                lblError.innerHTML = error;
-            });
-        }
-        
-        data.appendChild(dugme);
-
-        garaza.appendChild(data);
-    }
-    //ispisuje ime majstora u odgovarajucoj radionici u kojoj radi
-    export function IspisiMajstora(radionica:Radionica)
-    {
-        const garaza = document.getElementById(radionica.vrsta);
-        const data = document.createElement("ul");
-        const podatak = document.createElement("li");
-        podatak.innerHTML = "Majstor koji trenurno radi na vozilu:";
-        data.appendChild(podatak);
-        const podatak2 = document.createElement("li");
-        vratiMajtoraPoID(radionica.majstor).then (res => {
-            console.log(res)
-            podatak2.innerHTML = res.ime;
+    const dugme = document.createElement("button");
+    dugme.innerHTML = "Posalji majstora";
+    dugme.onclick = (ev) => {
+        servisTs.PosaljiMajstoraDaRadi(vozilo)
+        .then(() =>{
+            dugme.remove();
+        })
+        .catch(error => {
+            const lblError = garaza.querySelector("errorMessage");
+            lblError.innerHTML = error;
         });
-        data.appendChild(podatak2);
-        garaza.appendChild(data);
     }
-    //brise ime majstora iz radionice i dodaje dugme za izbacivanje vozila
-    export function IzbrisiMajstora(rad:Radionica)
-    {
-        const garaza = document.getElementById(rad.vrsta);
-        const data = garaza.lastChild;
-        data.remove();
+    
+    data.appendChild(dugme);
 
-        const dugme = document.createElement("button");
-        dugme.innerHTML = "Izbaci vozilo";
-        dugme.onclick = (ev) => {
-            servisTs.SegrtIzbacujeVozilo(rad)
-            .then(() =>{
-                dugme.remove();
+    garaza.appendChild(data);
+}
+//ispisuje ime majstora u odgovarajucoj radionici u kojoj radi
+export function IspisiMajstora(radionica:Radionica)
+{
+    const garaza = document.getElementById(radionica.vrsta);
+    const data = document.createElement("ul");
+    const podatak = document.createElement("li");
+    podatak.innerHTML = "Majstor koji trenurno radi na vozilu:";
+    data.appendChild(podatak);
+    const podatak2 = document.createElement("li");
+    vratiMajtoraPoID(radionica.majstor).then (res => {
+        console.log(res)
+        podatak2.innerHTML = res.ime;
+    });
+    data.appendChild(podatak2);
+    garaza.appendChild(data);
+}
+//brise ime majstora iz radionice i dodaje dugme za izbacivanje vozila
+export function IzbrisiMajstora(rad:Radionica)
+{
+    const garaza = document.getElementById(rad.vrsta);
+    const data = garaza.lastChild;
+    data.remove();
+
+    const dugme = document.createElement("button");
+    dugme.innerHTML = "Izbaci vozilo";
+    dugme.onclick = (ev) => {
+        servisTs.SegrtIzbacujeVozilo(rad)
+        .then(() =>{
+            dugme.remove();
+        })
+        .catch(error => {
+            const lblError = document.createElement("label");
+            lblError.innerHTML = error;
+            data.appendChild(lblError);
+        });
+    }
+    garaza.appendChild(dugme);
+}
+//funkcija koja brise neuredjenu listu sa podacima vozila iz radionice 
+export function brisiVozilo(radionica : string)
+{
+    const garaza = document.getElementById(radionica);
+    const data = garaza.firstChild;
+    
+    data.remove();
+}
+//funkcija za iscrtavanje futera i postavljanje neuredjene liste koja je inicijalno prazna (za dodavanja imena radnika)
+export function crtajFooter()
+{
+    const contain = document.getElementById("container");
+    const footer = document.createElement("div");
+    footer.className = "footer";
+
+    const labela = document.createElement("label");
+    labela.innerHTML = "Danasnji radnici:";
+
+    const radnici = document.createElement("div");
+    radnici.className = "radniciDiv";
+
+    const data = document.createElement("ul");
+    data.className ="listaChild";
+    data.id = "footerUL";
+
+    radnici.appendChild(data);
+    footer.appendChild(labela);
+    footer.appendChild(radnici);
+    contain.appendChild(footer);
+}
+
+//Popunjava vec napravljenu lancanu listu imenima radnika iz baze
+export function iscrtajDanasnjeRadnike(array: Majstor[] | Segrt[])
+{
+    
+    
+    const data = document.getElementById("footerUL");
+    
+    for(let i=0;i<array.length;i++)
+    {
+        const podatak = document.createElement("li");
+        podatak.innerHTML = array[i].ime;
+        data.appendChild(podatak);
+    }
+}
+//Funkcija koja crta divove i naslove za garaze i ubacuje divode za danasnja vozila i za uradjena vozila
+export function NapraviMesto()
+{
+    const path = document.getElementById("main2");
+    const lista = document.createElement("div");// div cele garaze
+    lista.className = "lista"; 
+
+    const sve = document.createElement("div");
+    sve.className = "danas";
+    const sveUL = document.createElement("ul");
+    sveUL.className = "sveUL";
+    sveUL.id = "sveUL";
+
+    const labela2 = document.createElement("label");
+    labela2.innerHTML = "Sva vozila za servis: ";
+    sve.appendChild(labela2);
+
+    sve.appendChild(sveUL);
+        
+    const danas = document.createElement("div");
+    danas.className = "danas";
+    const danasUL = document.createElement("ul");
+    danasUL.className = "danasUL";
+    danasUL.id = "danasUL";
+
+    const labela = document.createElement("label");
+    labela.innerHTML = "Vozila koja su danas uradjena:";
+    danas.appendChild(labela);
+
+    danas.appendChild(danasUL);
+    lista.appendChild(sve);
+    lista.appendChild(danas);
+    path.appendChild(lista);
+}
+//Iscrtava vozilo koje je prosledjeno iz baze za prikaz vozila koja cekaju red, 
+//postavljanje eventa na klik za dugme gde se vozilo prosldjuje u servis
+export function iscrtajDanasnjaVozila(vozila : Vozilo)
+{
+    const ul = document.getElementById("sveUL");
+    const voziloContainer = document.createElement("div");
+    voziloContainer.className = "voziloContainer";
+
+    const hidden = document.createElement("input");
+    hidden.type = "hidden";
+    hidden.innerHTML = vozila.id.toString();
+    voziloContainer.appendChild(hidden);
+
+    const podatak = document.createElement("li");
+    podatak.className = "podatak";
+    podatak.innerHTML = vozila.marka + " " + vozila.oznaka;
+    voziloContainer.appendChild(podatak);
+
+    const podatak2 = document.createElement("li");
+    podatak2.className = "podatak";
+    podatak2.innerHTML = vozila.registracija;
+    voziloContainer.appendChild(podatak2);
+
+    const podatak3 = document.createElement("li");
+    podatak3.className = "podatak";
+    podatak3.innerHTML = vozila.vrstaKvara;
+    voziloContainer.appendChild(podatak3);
+
+    const dugme = document.createElement("button");
+    dugme.className = "UbaciVoziloButton";
+    dugme.innerHTML = "Ubaci vozilo";
+    dugme.onclick = (ev) => {           
+        indexTs.ProslediUServis(vozila)
+            .then(res => {
+                if(res === true)
+                {
+                    voziloContainer.remove();
+                }
             })
             .catch(error => {
                 const lblError = document.createElement("label");
                 lblError.innerHTML = error;
-                data.appendChild(lblError);
+                voziloContainer.appendChild(lblError);
             });
-        }
-        garaza.appendChild(dugme);
     }
-    export function brisiVozilo(radionica : string)
-    {
-        const garaza = document.getElementById(radionica);
-        const data = garaza.firstChild;
-        
-        data.remove();
+    voziloContainer.appendChild(dugme);
+    ul.appendChild(voziloContainer);
+}
+
+//funkcija koja prikazuje vozilo koje je danas uradjena
+export function IscrtajUradjenoVozilo(vozilo:Vozilo)
+{
+    const ul = document.getElementById("danasUL");
+    const voziloContainer = document.createElement("div");
+    voziloContainer.className = "voziloContainer";
+
+    const podatak = document.createElement("li");
+    podatak.className = "podatak";
+    podatak.innerHTML = vozilo.marka + " " + vozilo.oznaka;
+    voziloContainer.appendChild(podatak);
+
+    const podatak2 = document.createElement("li");
+    podatak2.className = "podatak";
+    podatak2.innerHTML = vozilo.registracija;
+    voziloContainer.appendChild(podatak2);
+
+    const podatak3 = document.createElement("li");
+    podatak3.className = "podatak";
+    podatak3.innerHTML = vozilo.vrstaKvara;
+    voziloContainer.appendChild(podatak3);
+    ul.appendChild(voziloContainer);
+}
+//iscrtava dugme za pokretanje radnog vremena
+export function CrtajDugmeZaPocetakRadnogVremena()
+{
+    const container = document.getElementById("buttonContainer");
+    const dugme = document.createElement("button");
+    dugme.className = "ZapocniRadnoVreme";
+    dugme.innerHTML = "Otvori servis";
+    dugme.onclick = (ev) => {
+        container.firstChild.remove()
+        CrtajDugmeZaKrajRadnogVremena();
+        indexTs.RadnoVreme();
     }
-    //funkcija za prikaz danasnjih radnika
-    export function iscrtajDanasnjeRadnike(array:any)
-    {
-        const contain = document.getElementById("container");
-        var footer = document.createElement("div");
-        footer.className = "footer";
-        const labela = document.createElement("label");
-        labela.innerHTML = "Danasnji radnici:";
-        footer.appendChild(labela);
-        var radnici = document.createElement("div");
-        radnici.className = "radniciDiv";
-        
-        let i = 0;
-
-        //majstori
-
-        var div = document.createElement("div");
-        div.className = "zaRadnike";
-
-        const labela1 = document.createElement("label");
-        labela1.innerHTML = "Majstori:";
-        div.appendChild(labela1);
-        const data = document.createElement("ul");
-        data.className ="listaChild";
-        for(i=0;i<array["majstori"].length;i++)
-        {
-            const podatak = document.createElement("li");
-            podatak.innerHTML = array["majstori"][i].ime;
-            data.appendChild(podatak);
-        }
-
-        div.appendChild(data);
-        radnici.appendChild(div);
-        footer.appendChild(radnici);
-
-        //segrti:
-        
-        var div2 = document.createElement("div");
-        div2.className = "zaRadnike";
-
-        const labela2 = document.createElement("label");
-        labela2.innerHTML = "Segrti:";
-        div2.appendChild(labela2);
-        const data2 = document.createElement("ul");
-        data2.className ="listaChild";
-        for(i=0;i<array["majstori"].length;i++)
-        {
-            const podatak = document.createElement("li");
-            podatak.innerHTML = array["segrti"][i].ime;
-            data2.appendChild(podatak);
-        }
-        div2.appendChild(data2);
-        radnici.appendChild(div2);
-        footer.appendChild(radnici);
-        contain.appendChild(footer);
+    container.appendChild(dugme);
+}
+//iscrtava dugme za kraj radnog vremena
+export function CrtajDugmeZaKrajRadnogVremena():void
+{
+    const container = document.getElementById("buttonContainer");
+    const dugme = document.createElement("button");
+    dugme.className = "ZapocniRadnoVreme";
+    dugme.id = "zatvori";
+    dugme.innerHTML = "Zatvori servis";
+    dugme.onclick = (ev) => {
+        container.firstChild.remove();
     }
-    //Funkcija koja crta divove i naslove za garaze i ubacuje divode za danasnja vozila i za uradjena vozila
-    export function NapraviMesto()
-    {
-        const path = document.getElementById("main2");
-        const lista = document.createElement("div");// div cele garaze
-        lista.className = "lista"; 
+    container.appendChild(dugme);
+}
+//prikazuje koliko je trajalo radno vreme tog dana
+export function prikaziTrajanjeRadnogVremena(value:number):void
+{
+    const container = document.getElementById("buttonContainer");
+    console.log(value);
 
-        const sve = document.createElement("div");
-        sve.className = "danas";
-        const sveUL = document.createElement("ul");
-        sveUL.className = "sveUL";
-        sveUL.id = "sveUL";
-
-        const labela2 = document.createElement("label");
-        labela2.innerHTML = "Sva vozila za servis: ";
-        sve.appendChild(labela2);
-
-        sve.appendChild(sveUL);
-         
-        const danas = document.createElement("div");
-        danas.className = "danas";
-        const danasUL = document.createElement("ul");
-        danasUL.className = "danasUL";
-        danasUL.id = "danasUL";
-
-        const labela = document.createElement("label");
-        labela.innerHTML = "Vozila koja su danas uradjena:";
-        danas.appendChild(labela);
-
-        danas.appendChild(danasUL);
-        lista.appendChild(sve);
-        lista.appendChild(danas);
-        path.appendChild(lista);
-    }
-    //Iscrtava vozilo koje je prosledjeno iz baze za prikaz vozila koja cekaju red
-    export function iscrtajDanasnjaVozila(vozila : Vozilo)
-    {
-        // i++;
-        // if(vozila.id == i)
-        // {
-        //     //danas vozila
-        //     const ul = document.getElementById("danasUL");
-        //     const podatak = document.createElement("li");
-        //     podatak.innerHTML = vozila.marka + " " + vozila.oznaka;
-        //     ul.appendChild(podatak);
-        // }
-        // else
-        // {
-        //     //sva vozila
-        //     const ul = document.getElementById("sveUL");
-        //     const podatak = document.createElement("li");
-        //     podatak.innerHTML = vozila.marka + " " + vozila.oznaka;
-        //     ul.appendChild(podatak);
-        // }
-
-        //Iscrtava vozilo u neuredjenoj listi za izbor vozila
-        const ul = document.getElementById("sveUL");
-        const voziloContainer = document.createElement("div");
-        voziloContainer.className = "voziloContainer";
-
-        const hidden = document.createElement("input");
-        hidden.type = "hidden";
-        hidden.innerHTML = vozila.id.toString();
-        voziloContainer.appendChild(hidden);
-
-        // const podatak = document.createElement("li");
-        // podatak.innerHTML = vozila.marka + " " + vozila.oznaka + " " + vozila.registracija;
-        // voziloContainer.appendChild(podatak);
-
-        const podatak = document.createElement("li");
-        podatak.className = "podatak";
-        podatak.innerHTML = vozila.marka + " " + vozila.oznaka;
-        voziloContainer.appendChild(podatak);
-
-        const podatak2 = document.createElement("li");
-        podatak2.className = "podatak";
-        podatak2.innerHTML = vozila.registracija;
-        voziloContainer.appendChild(podatak2);
-
-        const podatak3 = document.createElement("li");
-        podatak3.className = "podatak";
-        podatak3.innerHTML = vozila.vrstaKvara;
-        voziloContainer.appendChild(podatak3);
-
-        const dugme = document.createElement("button");
-        dugme.className = "UbaciVoziloButton";
-        dugme.innerHTML = "Ubaci vozilo";
-        dugme.onclick = (ev) => {
-            //ovde stavi za poziv funkcije za ubacivanje vozila            
-            indexTs.ProslediUServis(vozila)
-                .then(res => {
-                    if(res === true)
-                    {
-                        voziloContainer.remove();
-                    }
-                })
-                .catch(error => {
-                    const lblError = document.createElement("label");
-                    lblError.innerHTML = error;
-                    voziloContainer.appendChild(lblError);
-                });
-        }
-        voziloContainer.appendChild(dugme);
-        ul.appendChild(voziloContainer);
-    }
-
-    //funkcija koja prikazuje vozilo koje je danas uradjena
-    export function IscrtajUradjenoVozilo(vozilo:Vozilo)
-    {
-        const ul = document.getElementById("danasUL");
-        const voziloContainer = document.createElement("div");
-        voziloContainer.className = "voziloContainer";
-
-        const podatak = document.createElement("li");
-        podatak.className = "podatak";
-        podatak.innerHTML = vozilo.marka + " " + vozilo.oznaka;
-        voziloContainer.appendChild(podatak);
-
-        const podatak2 = document.createElement("li");
-        podatak2.className = "podatak";
-        podatak2.innerHTML = vozilo.registracija;
-        voziloContainer.appendChild(podatak2);
-
-        const podatak3 = document.createElement("li");
-        podatak3.className = "podatak";
-        podatak3.innerHTML = vozilo.vrstaKvara;
-        voziloContainer.appendChild(podatak3);
-        ul.appendChild(voziloContainer);
-    }
-    
+    const podnaslov = document.createElement("h4");
+    if(value % 10 === 1)
+        podnaslov.innerHTML = "Danas je radjeno " + value + " sat";
+    else if(value % 10 > 1 && value % 10 < 5)
+        podnaslov.innerHTML = "Danas je radjeno " + value + " sata";
+    else if(value % 10 > 5 || value % 10 === 0)
+        podnaslov.innerHTML = "Danas je radjeno " + value + " sati";
+    container.appendChild(podnaslov);
+}
+//crta listu nakon zavrsetka radnog vremena koja 
+export function NapraviZaPrikazUradjenihBozila()
+{
+    const container = document.getElementById("buttonContainer");
+    const lista = document.createElement("ul");
+    lista.id = "danasUradjenoPrikaz";
+    container.appendChild(lista);
+}
+//prikazuje koje vozilo je uradjeno i njegove registarske oznake
+export function PrikaziDanasUradjenaVozila(vozilo:string[])
+{
+    const lista = document.getElementById("danasUradjenoPrikaz");
+    const item = document.createElement("li");
+    item.innerHTML = "Vozilo: " + vozilo[0] + " Registracia: " + vozilo[1];
+    lista.appendChild(item);
+}

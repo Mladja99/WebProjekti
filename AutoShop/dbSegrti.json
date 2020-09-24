@@ -1,0 +1,16 @@
+{
+  "segrti": [
+    {
+      "id": "3",
+      "ime": "Djoka",
+      "zauzet": false,
+      "radiNa": ""
+    },
+    {
+      "id": "4",
+      "ime": "Laza",
+      "zauzet": false,
+      "radiNa": ""
+    }
+  ]
+}

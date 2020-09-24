@@ -1,0 +1,18 @@
+{
+  "majstori": [
+    {
+      "id": "1",
+      "ime": "Pera",
+      "poznaje": "ecu, mehanika, elektrika",
+      "zauzet": false,
+      "radiNa": ""
+    },
+    {
+      "id": "2",
+      "ime": "Mika",
+      "poznaje": "mehanika, limarija",
+      "zauzet": false,
+      "radiNa": ""
+    }
+  ]
+}

@@ -4,7 +4,7 @@ import {fromFetch} from 'rxjs/fetch'
 import { switchMap } from "rxjs/operators";
 
 const url_vozila = "http://localhost:3000/vozila";
-
+//vraca sva vozila iz baze
 export function vratiVozila():Observable<Vozilo[]>
 {
     //return fetch(url_vozila).then(res => res.json());
@@ -18,20 +18,8 @@ export function vratiVozila():Observable<Vozilo[]>
   )  
   return data$;
 }
-
+//vraca vozilo po registarskoj oznaci (mora niz zato sto kako god da stavim vraca niz)
 export function getVoziloByReg(reg:string):Observable<Vozilo[]> {
-  // return from(
-  //   fetch("http://localhost:3000/vozila?Registracija="+ reg)
-  //     .then(response => {
-  //       if (!response.ok) {
-  //         throw new Error("reg not found")
-  //       }
-  //       else {
-  //         return response.json();
-  //       }
-  //     })
-  //     .catch(err => console.log(`Error `, err))
-  // )
   const data$ = fromFetch(url_vozila + "?Registracija=" + reg).pipe(
     switchMap(response => {
       if(response.ok)
@@ -42,7 +30,7 @@ export function getVoziloByReg(reg:string):Observable<Vozilo[]> {
   );
   return data$;
 }
-
+//radi update za vozilo
 export async function updateVozilo(vozilo:Vozilo):Promise<void>
 {
   console.log(vozilo);
@@ -53,7 +41,7 @@ export async function updateVozilo(vozilo:Vozilo):Promise<void>
   };
   await fetch(url_vozila+"/"+vozilo.id,UpdateTask);
 }
-
+//vraca vozilo sa trazenim id-em
 export function vratiVoziloPoID(id:number):Observable<Vozilo>
 {
   const data$ = fromFetch(url_vozila + "/" + id).pipe(
@@ -64,5 +52,19 @@ export function vratiVoziloPoID(id:number):Observable<Vozilo>
       }
     }),
   )    
+  return data$;
+}
+
+//vraca vozila koja su zavrsena
+export function vratiZavrsenaVozila():Observable<Vozilo[]>
+{
+  const data$ = fromFetch(url_vozila + "?status=" + "Izbacuje se").pipe(
+    switchMap(response => {
+      if(response.ok)
+      {
+        return response.json();
+      }
+    }),
+  );
   return data$;
 }

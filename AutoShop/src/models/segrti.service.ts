@@ -3,8 +3,8 @@ import { Segrt } from "./segrt";
 import { fromFetch } from "rxjs/fetch";
 import { switchMap, take } from "rxjs/operators";
 
-const url_segrti = "http://localhost:3000/segrti";
-
+const url_segrti = "http://localhost:3003/segrti";
+//vraca sve segrte iz baze
 export function vratiSegrte():Observable<Segrt[]>
 {
     //return fetch(url_segrti).then(res => res.json());
@@ -18,7 +18,7 @@ export function vratiSegrte():Observable<Segrt[]>
     )  
     return data$;
 }
-
+//vraca slobodne segrte kao niz (kasnije se uzima prvi slobodan)
 export function vratiSlobodnogSegrta():Observable<Segrt[]>
 {
     const data$ = fromFetch(url_segrti + "?zauzet=false").pipe(
@@ -31,7 +31,7 @@ export function vratiSlobodnogSegrta():Observable<Segrt[]>
     )  
     return data$;
 }
-
+//radi update za segrta
 export async function updateSergrt(segrt:Segrt):Promise<void>
 {
     console.log(segrt);

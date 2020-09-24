@@ -1,0 +1,130 @@
+{
+  "vozila": [
+    {
+      "id": 1,
+      "marka": "BMW",
+      "oznaka": "E90",
+      "registracija": "a111111",
+      "vrstaKvara": "ecu",
+      "opisProblema": "",
+      "status": "Izbacuje se"
+    },
+    {
+      "id": 2,
+      "marka": "BMW",
+      "oznaka": "E46",
+      "registracija": "a222222",
+      "vrstaKvara": "mehanika",
+      "opisProblema": "",
+      "status": "Izbacuje se"
+    },
+    {
+      "id": 3,
+      "marka": "Renault",
+      "oznaka": "4",
+      "registracija": "a333333",
+      "vrstaKvara": "mehanika",
+      "opisProblema": "",
+      "status": "Izbacuje se"
+    },
+    {
+      "id": 4,
+      "marka": "Volkswagen",
+      "oznaka": "Golf 4",
+      "registracija": "a444444",
+      "vrstaKvara": "elektrika",
+      "opisProblema": "",
+      "status": "Ceka segrta da ubaci vozilo"
+    },
+    {
+      "id": 5,
+      "marka": "Volksvagen",
+      "oznaka": "Chirocco",
+      "registracija": "a555555",
+      "vrstaKvara": "ecu",
+      "opisProblema": "",
+      "status": "Izbacuje se"
+    },
+    {
+      "id": 6,
+      "marka": "Volksvagen",
+      "oznaka": "Chirocco",
+      "registracija": "a666666",
+      "vrstaKvara": "ecu",
+      "opisProblema": "",
+      "status": "Izbacuje se"
+    },
+    {
+      "id": 7,
+      "marka": "Golf",
+      "oznaka": "6",
+      "registracija": "a777777",
+      "vrstaKvara": "limarija",
+      "opisProblema": "",
+      "status": "Izbacuje se"
+    },
+    {
+      "id": 8,
+      "marka": "BMW",
+      "oznaka": "e30",
+      "registracija": "a888888",
+      "vrstaKvara": "limarija",
+      "opisProblema": "",
+      "status": "Izbacuje se"
+    },
+    {
+      "id": 9,
+      "marka": "BMW",
+      "oznaka": "e87",
+      "registracija": "a999999",
+      "vrstaKvara": "ecu",
+      "opisProblema": "",
+      "status": "Izbacuje se"
+    },
+    {
+      "id": 10,
+      "marka": "audi",
+      "oznaka": "a6",
+      "registracija": "a101010",
+      "vrstaKvara": "mehanika",
+      "opisProblema": "",
+      "status": "Izbacuje se"
+    },
+    {
+      "id": 11,
+      "marka": "audi",
+      "oznaka": "a3",
+      "registracija": "a121212",
+      "vrstaKvara": "elektrika",
+      "opisProblema": "",
+      "status": ""
+    },
+    {
+      "id": 12,
+      "marka": "nissan",
+      "oznaka": "r35",
+      "registracija": "a131313",
+      "vrstaKvara": "ecu",
+      "opisProblema": "",
+      "status": "Izbacuje se"
+    },
+    {
+      "id": 13,
+      "marka": "fiat",
+      "oznaka": "punto",
+      "registracija": "a141414",
+      "vrstaKvara": "mehanika",
+      "opisProblema": "",
+      "status": "Izbacuje se"
+    },
+    {
+      "id": 14,
+      "marka": "fiat",
+      "oznaka": "punto",
+      "registracija": "a151515",
+      "vrstaKvara": "limarija",
+      "opisProblema": "",
+      "status": ""
+    }
+  ]
+}
