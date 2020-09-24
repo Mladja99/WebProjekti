@@ -10,9 +10,9 @@
     },
     {
       "id": 1,
-      "vozilo": 4,
+      "vozilo": null,
       "vrsta": "elektrika",
-      "zauzeto": true,
+      "zauzeto": false,
       "majstor": null,
       "segrt": null
     },

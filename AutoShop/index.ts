@@ -1,7 +1,7 @@
-import { View , iscrtajDanasnjeRadnike, iscrtajDanasnjaVozila, NapraviMesto, prikaziTrajanjeRadnogVremena, PrikaziDanasUradjenaVozila, NapraviZaPrikazUradjenihBozila } from "./src/view";
+import { View , iscrtajDanasnjeRadnike, iscrtajDanasnjaVozila, NapraviMesto, prikaziTrajanjeRadnogVremena, PrikaziDanasUradjenaVozila, NapraviZaPrikazUradjenihBozila, PrikaziProfitNaFormi } from "./src/view";
 import { DolazakVozila } from "./src/servis"
 import { vratiVozila, getVoziloByReg, vratiZavrsenaVozila } from "./src/models/vozila.service";
-import { from, interval, timer , merge , zip, fromEvent} from "rxjs";
+import { from, interval, timer , merge , zip, fromEvent, of} from "rxjs";
 import { switchMap, takeUntil, take, tap, takeLast, map, reduce, filter, count } from "rxjs/operators";
 import { vratiMajstore } from "./src/models/majstori.service";
 import { vratiSegrte, vratiSlobodnogSegrta } from "./src/models/segrti.service";
@@ -73,23 +73,33 @@ export function RadnoVreme():void
         })
     ).subscribe();
 }
-
+//Vadi iz forme na strani vozila koja su prikazana i vadi podatke i broj tablica za prikaz
 export function IzvuciVozilaKojaSuUradjena():void
 {
     NapraviZaPrikazUradjenihBozila();
-
+    PrikaziProfit();
     const container = document.getElementById("danasUL");
     if(container.children !== null)
     {
         zip(
             from(container.children).pipe( 
-                map( element => element.getElementsByTagName('li')[0].innerHTML),
-                tap(val => console.log(`BEFORE MAP: ${val}`)),
+                map( element => element.getElementsByTagName('li')[0].innerHTML)
             ),
             from(container.children).pipe(
-                map( element => element.getElementsByTagName('li')[1].innerHTML),
-                tap(val => console.log(`BEFORE MAP2: ${val}`)),
+                map( element => element.getElementsByTagName('li')[1].innerHTML)
             )
         ).subscribe(x => PrikaziDanasUradjenaVozila(x));
     }
+
+}
+//uzima vozila iz baze koja su sa statusom "izbacuje se"(zavrsena) i prepravlja samo na profit da bi se prikazao dnevni profit
+export function PrikaziProfit():void
+{
+    vratiZavrsenaVozila().subscribe( (data:Vozilo[]) => {
+        console.log(data);
+        from(data).pipe(
+            map(x => x.profit),
+            reduce((acc,val)=> acc = acc + +val)
+        ).subscribe(x => PrikaziProfitNaFormi(x));
+    })
 }

@@ -354,3 +354,12 @@ export function PrikaziDanasUradjenaVozila(vozilo:string[])
     item.innerHTML = "Vozilo: " + vozilo[0] + " Registracia: " + vozilo[1];
     lista.appendChild(item);
 }
+
+export function PrikaziProfitNaFormi(profit:number):void
+{
+    const container = document.getElementById("buttonContainer");
+    const lblProfit = document.createElement("label");
+    lblProfit.innerHTML = "Danasnji profit je: " + profit;
+
+    container.appendChild(lblProfit);
+}
